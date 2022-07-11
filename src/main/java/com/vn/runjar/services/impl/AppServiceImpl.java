@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.jvnet.hk2.annotations.Service;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,6 +19,9 @@ import java.nio.file.attribute.FileTime;
 public class AppServiceImpl implements AppService {
     private static AppServiceImpl instance;
 
+    /**
+     * create new instance of AppServiceImpl
+     */
     public static AppServiceImpl getInstance() {
         log.info("AppServiceImpl getInstance START");
         if (instance == null) {
@@ -31,13 +33,17 @@ public class AppServiceImpl implements AppService {
         return instance;
     }
 
+    /**
+     * run method into jar file
+     * Check the file has been replaced yet
+     */
     @Override
     public void fly(ClassInfo classInfo) {
-        log.info("AppServiceImpl fly START");
+        log.info("AppServiceImpl fly START with request {}" , classInfo);
         try {
             int count = 0;
             File fileName = new File(Constant.PATH);
-            log.info("AppServiceImpl fly PATH {}", Constant.PATH);
+            log.info("AppServiceImpl fly PATH {}", Paths.get(Constant.PATH));
             String className = classInfo.getClassName();
 
             // get time modified file
@@ -45,12 +51,13 @@ public class AppServiceImpl implements AppService {
             FileTime fileTime = attributes.lastAccessTime();
             log.info("AppServiceImpl fly FileTime {}", fileTime);
             // get current class
-            Class<?> classLoader = ClassesConfig.getCurrentClass(className);
+            Class<?> classLoader = ClassesConfig.getCurrentClass(className , fileName);
 
             while (true) {
                 log.info("AppServiceImpl fly FileNAME {}", fileName);
-                FileTime currentAccessFileTime = Files.readAttributes(Paths.get(fileName.toURI()), BasicFileAttributes.class)
-                        .lastAccessTime();
+                FileTime currentAccessFileTime = Files.readAttributes(Paths.get(fileName.toURI()),
+                                                                        BasicFileAttributes.class)
+                                                                        .lastAccessTime();
                 log.info("AppServiceImpl fly FileTime {}", currentAccessFileTime);
                 // check access time of this JAR file
                 // if 2 time diff -> file replaced and get class in current JAR file again
@@ -58,7 +65,7 @@ public class AppServiceImpl implements AppService {
                     log.info("CHANGE THE FILE");
                     log.info("AppServiceImpl fly FileTime {}", fileTime);
                     log.info("AppServiceImpl fly FileTime {}", currentAccessFileTime);
-                    classLoader = ClassesConfig.getCurrentClass(className);
+                    classLoader = ClassesConfig.getCurrentClass(className , fileName);
                 }
                 this.fly(classLoader, classInfo.getMethodName());
                 count++;
@@ -68,6 +75,7 @@ public class AppServiceImpl implements AppService {
         } catch (Exception e) {
             log.error("AppServiceImpl fly ERROR with ", e);
         }
+        log.info("AppServiceImpl fly END with request {}" , classInfo);
     }
 
     /**
@@ -80,6 +88,7 @@ public class AppServiceImpl implements AppService {
             Method method = classLoaded.getDeclaredMethod(classMethod);
             // create instance of class
             Object instance = classLoaded.getDeclaredConstructor().newInstance();
+            // and run method in this class
             method.invoke(instance);
             Thread.sleep(1000);
             log.info("AppServiceImpl method private of fly() END");

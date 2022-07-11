@@ -1,0 +1,6 @@
+com\vn\runjar\resources\AppResource.class
+com\vn\runjar\services\AppService.class
+com\vn\runjar\model\ClassInfo.class
+com\vn\runjar\services\impl\AppServiceImpl.class
+com\vn\runjar\constant\Constant.class
+com\vn\runjar\config\ClassesConfig.class

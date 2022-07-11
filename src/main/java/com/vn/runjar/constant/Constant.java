@@ -1,5 +1,5 @@
 package com.vn.runjar.constant;
 
 public class Constant {
-    public static final String PATH = "C:\\Users\\SonTT\\Downloads\\Work-Space\\runJAR\\lib\\flyWithMe.jar";
+    public static final String PATH = "D:\\Example\\WS\\runJARFile\\runtime-jar\\lib\\flyWithMe.jar";
 }
