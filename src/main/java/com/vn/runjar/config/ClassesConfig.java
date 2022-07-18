@@ -1,5 +1,6 @@
 package com.vn.runjar.config;
 
+import com.vn.runjar.constant.Constant;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -13,13 +14,14 @@ public class ClassesConfig {
      *
      * @return Class
      */
-    public static Class<?> getCurrentClass(String className , File file) {
+    public static Class<?> getCurrentClass(String className) {
         log.info("ClassesConfig getCurrentClass START with ClassName : {}" , className);
         try {
+            File fileName = new File(Constant.PATH);
             // get class loader parent
             ClassLoader parent = ClassesConfig.class.getClassLoader();
             // get url of file
-            URL[] url = new URL[]{file.toURI().toURL()};
+            URL[] url = new URL[]{fileName.toURI().toURL()};
             //get URL Class loader child
             URLClassLoader child = new URLClassLoader(url , parent);
 

@@ -19,7 +19,7 @@ public class AppResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response fly(ClassInfo classInfo) {
         log.info("AppResource fly() START");
-        appService.fly(classInfo);
+        appService.flyAgain(classInfo);
         log.info("AppResource fly() END");
         return Response.ok().build();
     }

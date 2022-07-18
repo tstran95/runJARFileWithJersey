@@ -1,11 +1,15 @@
 package com.vn.runjar.services.impl;
 
 import com.vn.runjar.config.ClassesConfig;
+import com.vn.runjar.config.JedisPoolFactory;
 import com.vn.runjar.constant.Constant;
 import com.vn.runjar.model.ClassInfo;
 import com.vn.runjar.services.AppService;
+import com.vn.runjar.utils.AppUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.jvnet.hk2.annotations.Service;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -35,11 +39,12 @@ public class AppServiceImpl implements AppService {
 
     /**
      * run method into jar file
-     * Check the file has been replaced yet
+     * Check the file has been replaced yet by time access of file
      */
+    @Deprecated
     @Override
     public void fly(ClassInfo classInfo) {
-        log.info("AppServiceImpl fly START with request {}" , classInfo);
+        log.info("AppServiceImpl fly START with request {}", classInfo);
         try {
             int count = 0;
             File fileName = new File(Constant.PATH);
@@ -51,13 +56,23 @@ public class AppServiceImpl implements AppService {
             FileTime fileTime = attributes.lastAccessTime();
             log.info("AppServiceImpl fly FileTime {}", fileTime);
             // get current class
-            Class<?> classLoader = ClassesConfig.getCurrentClass(className , fileName);
+            Class<?> classLoader = ClassesConfig.getCurrentClass(className);
+
+            //            // get old hex stored in redis
+            //            String oldHex = jedis.get(Constant.HEX_STRING);
+            //
+            //            // compare 2 string together
+            //            // if 2 hex diff -> file replaced and get class in current JAR file again
+            //            if (!oldHex.equals(hexStr)) {
+            //                log.info("CHANGE THE FILE");
+            //                classLoader = ClassesConfig.getCurrentClass(className);
+            //            }
 
             while (true) {
                 log.info("AppServiceImpl fly FileNAME {}", fileName);
                 FileTime currentAccessFileTime = Files.readAttributes(Paths.get(fileName.toURI()),
-                                                                        BasicFileAttributes.class)
-                                                                        .lastAccessTime();
+                                BasicFileAttributes.class)
+                        .lastAccessTime();
                 log.info("AppServiceImpl fly FileTime {}", currentAccessFileTime);
                 // check access time of this JAR file
                 // if 2 time diff -> file replaced and get class in current JAR file again
@@ -65,7 +80,7 @@ public class AppServiceImpl implements AppService {
                     log.info("CHANGE THE FILE");
                     log.info("AppServiceImpl fly FileTime {}", fileTime);
                     log.info("AppServiceImpl fly FileTime {}", currentAccessFileTime);
-                    classLoader = ClassesConfig.getCurrentClass(className , fileName);
+                    classLoader = ClassesConfig.getCurrentClass(className);
                 }
                 this.fly(classLoader, classInfo.getMethodName());
                 count++;
@@ -75,13 +90,55 @@ public class AppServiceImpl implements AppService {
         } catch (Exception e) {
             log.error("AppServiceImpl fly ERROR with ", e);
         }
-        log.info("AppServiceImpl fly END with request {}" , classInfo);
+        log.info("AppServiceImpl fly END with request {}", classInfo);
+    }
+
+    /**
+     * Check the file has been replaced yet by checkSum
+     * run method into jar file
+     */
+    public void flyAgain(ClassInfo classInfo) {
+        log.info("AppServiceImpl fly START with request {}", classInfo);
+        try {
+            int count = 0;
+            String className = classInfo.getClassName();
+            JedisPool jedisPool = JedisPoolFactory.generateJedisPoolFactory();
+            Jedis jedis = jedisPool.getResource();
+
+            // creat hex string of file
+            String hexStr = AppUtil.checkSum(Constant.PATH);
+            log.info("AppServiceImpl fly HEX {}", hexStr);
+
+            // get current class in jar file
+            Class<?> classLoader = ClassesConfig.getCurrentClass(className);
+
+            while (true) {
+                //get current hex string of this file
+                String currentHex = AppUtil.checkSum(Constant.PATH);
+                log.info("AppServiceImpl fly HEX {}", currentHex);
+
+                // compare 2 string together
+                // if 2 hex diff -> file replaced and get class in current JAR file again
+                if (!currentHex.equals(hexStr)) {
+                    log.info("CHANGE THE FILE");
+                    hexStr = currentHex;
+                    classLoader = ClassesConfig.getCurrentClass(className);
+                }
+                // run the method with input name in class has been founded
+                this.fly(classLoader, classInfo.getMethodName());
+                count++;
+                log.info("-------------- " + count + " ----------------");
+            }
+        } catch (Exception e) {
+            log.error("AppServiceImpl flyAgain ERROR with ", e);
+        }
+        log.info("AppServiceImpl fly END");
     }
 
     /**
      * Run method in JAR file
      */
-    private void fly(Class<?> classLoaded, String classMethod) {
+    public void fly(Class<?> classLoaded, String classMethod) {
         log.info("AppServiceImpl method private of fly() START");
         try {
             // get Method in class by name
@@ -90,7 +147,7 @@ public class AppServiceImpl implements AppService {
             Object instance = classLoaded.getDeclaredConstructor().newInstance();
             // and run method in this class
             method.invoke(instance);
-            Thread.sleep(1000);
+            Thread.sleep(2000);
             log.info("AppServiceImpl method private of fly() END");
         } catch (Exception e) {
             log.error("AppServiceImpl method private of fly() ERROR With MESSAGE ", e);
