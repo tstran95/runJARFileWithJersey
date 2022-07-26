@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
+import java.util.Objects;
 
 @Slf4j
 public class AppUtil {
@@ -19,7 +20,7 @@ public class AppUtil {
             // file hashing with DigestInputStream
             MessageDigest md = MessageDigest.getInstance(Constant.ALGORITHM); //SHA, MD2, MD5, SHA-256, SHA-384...
             try (DigestInputStream dis = new DigestInputStream(Files.newInputStream(Paths.get(path)), md)) {
-//                while (dis.read() != -1) ; //empty loop to clear the data
+                while (dis.read() != -1) ; //empty loop to clear the data
                 md = dis.getMessageDigest();
             }
 
@@ -33,5 +34,10 @@ public class AppUtil {
         }
         log.info("AppUtil checkSum END with HEX STRING :  {}" , result);
         return result.toString();
+    }
+
+    public static String  getPath() {
+        String mainPath = Objects.requireNonNull(AppUtil.class.getResource("/")).getPath();
+        return mainPath.substring(0 , mainPath.lastIndexOf("/target")) + Constant.PATH;
     }
 }

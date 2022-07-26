@@ -2,10 +2,13 @@ package com.vn.runjar.services.impl;
 
 import com.vn.runjar.config.ClassesConfig;
 import com.vn.runjar.config.JedisPoolFactory;
+import com.vn.runjar.config.Main;
 import com.vn.runjar.constant.Constant;
+import com.vn.runjar.exception.VNPAYException;
 import com.vn.runjar.model.ClassInfo;
 import com.vn.runjar.services.AppService;
 import com.vn.runjar.utils.AppUtil;
+import com.vn.runjar.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.jvnet.hk2.annotations.Service;
 import redis.clients.jedis.Jedis;
@@ -17,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -47,8 +51,8 @@ public class AppServiceImpl implements AppService {
         log.info("AppServiceImpl fly START with request {}", classInfo);
         try {
             int count = 0;
-            File fileName = new File(Constant.PATH);
-            log.info("AppServiceImpl fly PATH {}", Paths.get(Constant.PATH));
+            File fileName = new File(AppUtil.getPath());
+            log.info("AppServiceImpl fly PATH {}", Paths.get(AppUtil.getPath()));
             String className = classInfo.getClassName();
 
             // get time modified file
@@ -57,16 +61,6 @@ public class AppServiceImpl implements AppService {
             log.info("AppServiceImpl fly FileTime {}", fileTime);
             // get current class
             Class<?> classLoader = ClassesConfig.getCurrentClass(className);
-
-            //            // get old hex stored in redis
-            //            String oldHex = jedis.get(Constant.HEX_STRING);
-            //
-            //            // compare 2 string together
-            //            // if 2 hex diff -> file replaced and get class in current JAR file again
-            //            if (!oldHex.equals(hexStr)) {
-            //                log.info("CHANGE THE FILE");
-            //                classLoader = ClassesConfig.getCurrentClass(className);
-            //            }
 
             while (true) {
                 log.info("AppServiceImpl fly FileNAME {}", fileName);
@@ -100,13 +94,12 @@ public class AppServiceImpl implements AppService {
     public void flyAgain(ClassInfo classInfo) {
         log.info("AppServiceImpl fly START with request {}", classInfo);
         try {
+            Validator.checkInput(classInfo);
             int count = 0;
             String className = classInfo.getClassName();
-            JedisPool jedisPool = JedisPoolFactory.generateJedisPoolFactory();
-            Jedis jedis = jedisPool.getResource();
 
             // creat hex string of file
-            String hexStr = AppUtil.checkSum(Constant.PATH);
+            String hexStr = AppUtil.checkSum(AppUtil.getPath());
             log.info("AppServiceImpl fly HEX {}", hexStr);
 
             // get current class in jar file
@@ -114,7 +107,7 @@ public class AppServiceImpl implements AppService {
 
             while (true) {
                 //get current hex string of this file
-                String currentHex = AppUtil.checkSum(Constant.PATH);
+                String currentHex = AppUtil.checkSum(AppUtil.getPath());
                 log.info("AppServiceImpl fly HEX {}", currentHex);
 
                 // compare 2 string together
@@ -128,11 +121,12 @@ public class AppServiceImpl implements AppService {
                 this.fly(classLoader, classInfo.getMethodName());
                 count++;
                 log.info("-------------- " + count + " ----------------");
+                log.info("AppServiceImpl fly END");
             }
         } catch (Exception e) {
             log.error("AppServiceImpl flyAgain ERROR with ", e);
+            throw e;
         }
-        log.info("AppServiceImpl fly END");
     }
 
     /**
@@ -151,6 +145,7 @@ public class AppServiceImpl implements AppService {
             log.info("AppServiceImpl method private of fly() END");
         } catch (Exception e) {
             log.error("AppServiceImpl method private of fly() ERROR With MESSAGE ", e);
+            throw new VNPAYException(Constant.INVOKE_FALSE);
         }
     }
 }
