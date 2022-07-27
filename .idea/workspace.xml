@@ -10,15 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="check file replaced by checkSum">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/validation/Validator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/runJARFileWithJersey_war.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/runJARFileWithJersey_war_exploded.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/flyWithMe.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flyWithMe.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/ClassesConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/ClassesConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/JedisPoolFactory.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/MyTimerTask.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/resources/AppResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/resources/AppResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/AppService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/AppService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
@@ -79,6 +77,9 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
 }</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Example\WS\runJARFile\runtime-jar" />
@@ -97,7 +98,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.com.vn.runjar.config.Main">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.64">
     <configuration name="AppServiceImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.vn.runjar.services.impl.AppServiceImpl" />
       <module name="runJARFileWithJersey" />
@@ -117,6 +118,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.vn.runjar.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RecursiveWatchServiceExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.vn.runjar.validation.RecursiveWatchServiceExample" />
+      <module name="runJar" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vn.runjar.validation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -162,6 +176,7 @@
       </method>
     </configuration>
     <configuration name="Tomcat 9.0.64" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.64" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="runJar:war exploded">
@@ -249,6 +264,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.RecursiveWatchServiceExample" />
       <item itemvalue="Application.com.vn.runjar.config.ClassesConfig" />
       <item itemvalue="Application.com.vn.runjar.config.Main" />
       <item itemvalue="Application.AppServiceImpl" />
@@ -257,6 +273,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.RecursiveWatchServiceExample" />
         <item itemvalue="Application.com.vn.runjar.config.Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.com.vn.runjar.config.ClassesConfig" />
@@ -283,6 +300,10 @@
       <workItem from="1658823032612" duration="853000" />
       <workItem from="1658824054255" duration="632000" />
       <workItem from="1658825178747" duration="3128000" />
+      <workItem from="1658830038828" duration="677000" />
+      <workItem from="1658885390856" duration="15329000" />
+      <workItem from="1658907595070" duration="8120000" />
+      <workItem from="1658916021550" duration="162000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1657507877929</created>

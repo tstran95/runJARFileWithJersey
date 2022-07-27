@@ -9,4 +9,5 @@ public class Constant {
     public static final String CLASS_INFO_NULL = "ClassInfo is null";
     public static final String INVOKE_FALSE = "Cant invoke method!!";
     public static final String CLASS_NOT_FOUND = "Class not found!!!!";
+    public static final String JAR_FILE_NAME = "flyWithMe.jar";
 }

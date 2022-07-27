@@ -1,4 +1,7 @@
 com/vn/runjar/config/MyTimerTask.class
+com/vn/runjar/validation/Validator.class
+com/vn/runjar/validation/RecursiveWatchServiceExample$1.class
+com/vn/runjar/validation/RecursiveWatchServiceExample.class
 com/vn/runjar/services/impl/AppServiceImpl.class
 com/vn/runjar/constant/Constant.class
 com/vn/runjar/model/ClassInfo.class
