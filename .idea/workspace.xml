@@ -11,8 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="fix logic and check by Sum">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/flyWithMe.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flyWithMe.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" afterDir="false" />
     </list>
@@ -307,7 +307,8 @@
       <workItem from="1658977128598" duration="9611000" />
       <workItem from="1658992485352" duration="7707000" />
       <workItem from="1659000765766" duration="1480000" />
-      <workItem from="1659002304830" duration="1649000" />
+      <workItem from="1659002304830" duration="1772000" />
+      <workItem from="1659004312607" duration="276000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1657507877929</created>
@@ -358,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659003353813</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix logic and check by Sum">
+      <created>1659003997858</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1659003997858</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

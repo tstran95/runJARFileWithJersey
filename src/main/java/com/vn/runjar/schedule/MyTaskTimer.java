@@ -28,4 +28,8 @@ public class MyTaskTimer extends TimerTask {
             }
         }
     }
+
+    private void checkByWatchEvent() {
+
+    }
 }

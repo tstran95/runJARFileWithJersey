@@ -15,4 +15,8 @@ public class Main {
         Timer timer = new Timer();
         timer.schedule(schedule, new Date(), 10000);
     }
+
+    public static void changeClass(Class<?> clazzNew ) {
+        clazz = clazzNew;
+    }
 }

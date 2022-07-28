@@ -219,6 +219,7 @@ public class AppServiceImpl implements AppService {
             if (Constant.STATUS_CHANGED.equals(status)) {
                 classLoaded = ClassesConfig.getCurrentClass(classInfo.getClassName() , false , path);
                 jedis.hset(Constant.KEY_CHECK_CHANGE , Constant.STATUS_STR , Constant.STATUS_DEFAULT);
+                Main.changeClass(classLoaded);
                 log.info("CHANGE THE FILE");
             }
         }
