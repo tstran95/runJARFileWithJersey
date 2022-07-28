@@ -9,19 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="add case check file replaced by WatchService">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/JedisPoolFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/runJar_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/runJar_war_exploded.xml" afterDir="false" />
+    <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="fix logic and check by Sum">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runJar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/runJar.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/ClassesConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/ClassesConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/resources/AppResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/resources/AppResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,7 +307,7 @@
       <workItem from="1658977128598" duration="9611000" />
       <workItem from="1658992485352" duration="7707000" />
       <workItem from="1659000765766" duration="1480000" />
-      <workItem from="1659002304830" duration="798000" />
+      <workItem from="1659002304830" duration="1649000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1657507877929</created>
@@ -358,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658916784911</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix logic and check by Sum">
+      <created>1659003353813</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659003353813</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,7 +381,8 @@
     <MESSAGE value="remove redundant files" />
     <MESSAGE value="check file replaced by checkSum" />
     <MESSAGE value="add case check file replaced by WatchService" />
-    <option name="LAST_COMMIT_MESSAGE" value="add case check file replaced by WatchService" />
+    <MESSAGE value="fix logic and check by Sum" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix logic and check by Sum" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

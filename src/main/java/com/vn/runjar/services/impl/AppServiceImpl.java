@@ -215,10 +215,10 @@ public class AppServiceImpl implements AppService {
 
         //the next time, check data in redis : if file jar was modified, load class again
         try (Jedis jedis = jedisPool.getResource()) {
-            String status = jedis.hget("CHECK_CHANGE" , "status");
-            if ("1".equals(status)) {
+            String status = jedis.hget(Constant.KEY_CHECK_CHANGE , Constant.STATUS_STR);
+            if (Constant.STATUS_CHANGED.equals(status)) {
                 classLoaded = ClassesConfig.getCurrentClass(classInfo.getClassName() , false , path);
-                jedis.hset("CHECK_CHANGE" , "status" , "0");
+                jedis.hset(Constant.KEY_CHECK_CHANGE , Constant.STATUS_STR , Constant.STATUS_DEFAULT);
                 log.info("CHANGE THE FILE");
             }
         }
