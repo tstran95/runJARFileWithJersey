@@ -1,6 +1,8 @@
 package com.vn.runjar.services.impl;
 
 import com.vn.runjar.config.ClassesConfig;
+import com.vn.runjar.config.JedisPoolFactory;
+import com.vn.runjar.config.Main;
 import com.vn.runjar.constant.Constant;
 import com.vn.runjar.exception.VNPAYException;
 import com.vn.runjar.model.ClassInfo;
@@ -9,6 +11,8 @@ import com.vn.runjar.utils.AppUtil;
 import com.vn.runjar.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.jvnet.hk2.annotations.Service;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,11 +58,12 @@ public class AppServiceImpl implements AppService {
             String className = classInfo.getClassName();
 
             // get time modified file
-            BasicFileAttributes attributes = Files.readAttributes(Paths.get(fileName.toURI()), BasicFileAttributes.class);
+            BasicFileAttributes attributes = Files.readAttributes(Paths.get(fileName.toURI()),
+                                                                    BasicFileAttributes.class);
             FileTime fileTime = attributes.lastAccessTime();
             log.info("AppServiceImpl fly FileTime {}", fileTime);
             // get current class
-            Class<?> classLoader = ClassesConfig.getCurrentClass(className);
+            Class<?> classLoader = ClassesConfig.getCurrentClass(className , true , path);
 
             while (true) {
                 log.info("AppServiceImpl fly FileNAME {}", fileName);
@@ -72,9 +77,9 @@ public class AppServiceImpl implements AppService {
                     log.info("CHANGE THE FILE");
                     log.info("AppServiceImpl fly FileTime {}", fileTime);
                     log.info("AppServiceImpl fly FileTime {}", currentAccessFileTime);
-                    classLoader = ClassesConfig.getCurrentClass(className);
+                    classLoader = ClassesConfig.getCurrentClass(className , true , path);
                 }
-                this.fly(classLoader, classInfo.getMethodName());
+                this.invokeMethod(classLoader, classInfo.getMethodName());
                 count++;
                 log.info("-------------- " + count + " ----------------");
                 log.info("AppServiceImpl fly END");
@@ -90,6 +95,7 @@ public class AppServiceImpl implements AppService {
      * Check the file has been replaced yet by checkSum
      * run method into jar file
      */
+    @Deprecated
     public void flyAgain(ClassInfo classInfo) {
         log.info("AppServiceImpl fly START with request {}", classInfo);
         try {
@@ -103,7 +109,7 @@ public class AppServiceImpl implements AppService {
             log.info("AppServiceImpl fly HEX {}", hexStr);
 
             // get current class in jar file
-            Class<?> classLoader = ClassesConfig.getCurrentClass(className);
+            Class<?> classLoader = ClassesConfig.getCurrentClass(className , true , path);
 
             while (true) {
                 //get current hex string of this file
@@ -115,10 +121,10 @@ public class AppServiceImpl implements AppService {
                 if (!currentHex.equals(hexStr)) {
                     log.info("CHANGE THE FILE");
                     hexStr = currentHex;
-                    classLoader = ClassesConfig.getCurrentClass(className);
+                    classLoader = ClassesConfig.getCurrentClass(className , true , path);
                 }
                 // run the method with input name in class has been found
-                this.fly(classLoader, classInfo.getMethodName());
+                this.invokeMethod(classLoader, classInfo.getMethodName());
                 count++;
                 log.info("-------------- " + count + " ----------------");
                 log.info("AppServiceImpl fly END");
@@ -130,10 +136,11 @@ public class AppServiceImpl implements AppService {
     }
 
     /**
-     * Check the file has been replaced yet by checkSum
+     * Check the file has been replaced yet by WatchEvent
      * run method into jar file
      */
-    public void flying(ClassInfo classInfo) throws IOException {
+    @Deprecated
+    public void flying(ClassInfo classInfo) {
         log.info("AppServiceImpl flying START with request {}", classInfo);
         try {
             // validate input, check input not null
@@ -147,10 +154,10 @@ public class AppServiceImpl implements AppService {
             Path dir = Paths.get(path).getParent();
 
             //register a folder to WatchService to listen modify event in this folder
-            dir.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
+            dir.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY , StandardWatchEventKinds.ENTRY_CREATE);
 
             // get current class in jar file
-            Class<?> classLoader = ClassesConfig.getCurrentClass(className);
+            Class<?> classLoader = ClassesConfig.getCurrentClass(className , true , path);
 
             while (true) {
                 //retrieve and delete the next key or return null if any key does not exist
@@ -158,40 +165,66 @@ public class AppServiceImpl implements AppService {
                 log.info("A key is : {}", key);
 
                 // if key is null, don't have event in registered folder
-                // else listen event, check modify event with file jar and load this class again
+                // else listen event, check modify event with jar file and load class in jar file again
                 if (Objects.nonNull(key)) {
+                    log.info("FILE was MODIFIED");
                     for (WatchEvent<?> event : key.pollEvents()) {
                         // Retrieve the type of event by using the kind() method.
                         WatchEvent.Kind<?> kind = event.kind();
                         //cast type of WatchEvent to Path
                         WatchEvent<Path> ev = (WatchEvent<Path>) event;
-                        Path fileName = ev.context();
+                        Path fileName = ev.context().getFileName();
                         // compare type of event with modify event
-                        if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
+                        if ((kind == StandardWatchEventKinds.ENTRY_MODIFY) ||
+                                (kind == StandardWatchEventKinds.ENTRY_CREATE)) {
                             // compare name of file was changed with name of file want check
                             // if same the name ->> load class again
-                            if (Constant.JAR_FILE_NAME.equals(fileName.getFileName().toString())) {
-                                log.info("A file {} was modified.", fileName.getFileName());
-                                classLoader = ClassesConfig.getCurrentClass(className);
+                            if (Constant.JAR_FILE_NAME.equals(fileName.toString())) {
+                                log.info("A file {} was modified.", fileName);
+                                classLoader = ClassesConfig.getCurrentClass(className , true , path);
                             }
                         }
                     }
-                    // if reset() return false, key can't receive new event and out the loop
+                    // if reset() return false, key can't receive new event and break out of loop
                     if (!key.reset()) {
                         log.info("The Key not cant receive new event!!!!");
                         break;
                     }
                 }
                 // run the method with input name in class has been found
-                this.fly(classLoader, classInfo.getMethodName());
+                this.invokeMethod(classLoader, classInfo.getMethodName());
                 count++;
                 log.info("-------------- " + count + " ----------------");
                 log.info("AppServiceImpl flying END");
             }
-        } catch (Exception e) {
+        }catch (IOException e) {
+            log.error("AppServiceImpl flying ERROR with ", e);
+            throw new VNPAYException("IOException");
+        }
+        catch (Exception e) {
             log.error("AppServiceImpl flying ERROR with ", e);
             throw e;
         }
+    }
+
+    public void run(ClassInfo classInfo) {
+        String path = AppUtil.getPath();
+        JedisPool jedisPool = JedisPoolFactory.getInstance();
+        //the first time, load class
+        Class<?>  classLoaded = Main.clazz;
+
+        //the next time, check data in redis : if file jar was modified, load class again
+        try (Jedis jedis = jedisPool.getResource()) {
+            String status = jedis.hget("CHECK_CHANGE" , "status");
+            if ("1".equals(status)) {
+                classLoaded = ClassesConfig.getCurrentClass(classInfo.getClassName() , false , path);
+                jedis.hset("CHECK_CHANGE" , "status" , "0");
+                log.info("CHANGE THE FILE");
+            }
+        }
+
+        //invoke method into jar file
+        this.invokeMethod(classLoaded , classInfo.getMethodName());
     }
 
 
@@ -199,7 +232,7 @@ public class AppServiceImpl implements AppService {
     /**
      * Run method in JAR file
      */
-    public void fly(Class<?> classLoaded, String classMethod) {
+    public void invokeMethod(Class<?> classLoaded, String classMethod) {
         log.info("AppServiceImpl method private of fly() START");
         try {
             // get Method in class by name
@@ -208,7 +241,6 @@ public class AppServiceImpl implements AppService {
             Object instance = classLoaded.getDeclaredConstructor().newInstance();
             // and run method in this class
             method.invoke(instance);
-            Thread.sleep(2000);
             log.info("AppServiceImpl method private of fly() END");
         } catch (Exception e) {
             log.error("AppServiceImpl method private of fly() ERROR With MESSAGE ", e);

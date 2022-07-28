@@ -34,14 +34,16 @@ public class AppUtil {
             }
         } catch (Exception e) {
             log.info("AppUtil checkSum ERROR with error : ", e);
-            throw new VNPAYException(Constant.CHECK_SUM_ERROR);
+//            throw new VNPAYException(Constant.CHECK_SUM_ERROR);
+            checkSum("/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/lib/flyWithMe.jar");
         }
         log.info("AppUtil checkSum END with HEX STRING :  {}", result);
         return result.toString();
     }
 
     public static String getPath() {
-        return Paths.get(Objects.requireNonNull(AppUtil.class.getResource("/")).getPath())
-                    .getParent().getParent().getParent().getParent() + Constant.PATH;
+//        return Paths.get(Objects.requireNonNull(AppUtil.class.getResource("/")).getPath())
+//                    .getParent().getParent().getParent().getParent() + Constant.PATH;
+        return "/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/lib/flyWithMe.jar";
     }
 }

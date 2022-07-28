@@ -20,7 +20,7 @@ public class AppResource {
     public Response fly(ClassInfo classInfo) {
         log.info("AppResource fly() START");
         try {
-            appService.flying(classInfo);
+            appService.run(classInfo);
         }catch (Exception e) {
             return null;
         }
