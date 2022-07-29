@@ -1,5 +1,5 @@
 <configuration>
-    <property name="LOG" value="C:/Users/SonTT/Downloads/Work-Space/runJAR/logs"/>
+    <property name="LOG" value="/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/logs"/>
     <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
 
 

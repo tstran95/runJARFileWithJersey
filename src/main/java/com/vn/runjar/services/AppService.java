@@ -1,9 +1,8 @@
 package com.vn.runjar.services;
 
 import com.vn.runjar.model.ClassInfo;
-
-import java.io.IOException;
+import com.vn.runjar.response.Response;
 
 public interface AppService {
-    void fly(ClassInfo classInfo) throws IOException;
+    Response run(ClassInfo classInfo);
 }

@@ -2,7 +2,6 @@ package com.vn.runjar.config;
 
 import com.vn.runjar.constant.Constant;
 import com.vn.runjar.exception.VNPAYException;
-import com.vn.runjar.utils.AppUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -15,14 +14,13 @@ public class ClassesConfig {
 
     /**
      * Find Class in JAR file by Path
-     *
      * @return Class
      */
     public static Class<?> getCurrentClass(String className , boolean status , String path) {
         log.info("ClassesConfig getCurrentClass START with ClassName : {}" , className);
         try {
             File fileName = new File(path);
-            System.out.println(fileName);
+            log.info("ClassesConfig getCurrentClass with PATH FILE  : {}" , fileName);
             // get class loader parent
             ClassLoader parent = ClassesConfig.class.getClassLoader();
             // get url of file
@@ -36,6 +34,7 @@ public class ClassesConfig {
             log.error("ClassesConfig getCurrentClass ERROR with e : " , e);
             throw new VNPAYException(Constant.CLASS_NOT_FOUND);
         } catch (MalformedURLException e) {
+            log.error("ClassesConfig getCurrentClass ERROR with e : " , e);
             throw new RuntimeException(e);
         }
     }
