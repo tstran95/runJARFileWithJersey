@@ -9,24 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="fix logic and check by Sum">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/response/Response.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="fix logic and check by Event + timeAccess">
+      <change afterPath="$PROJECT_DIR$/config/app.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runJar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/runJar.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/flyWithMe.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flyWithMe.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/ClassesConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/ClassesConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/resources/AppResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/resources/AppResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/AppService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/AppService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/validation/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/validation/Validator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/runJar-1.0-SNAPSHOT/WEB-INF/classes/META-INF/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/runJar-1.0-SNAPSHOT/WEB-INF/classes/META-INF/logback.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +67,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/config&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
@@ -94,6 +85,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/config" />
       <recent name="D:\Example\WS\runJARFile\runtime-jar" />
     </key>
   </component>
@@ -323,7 +315,8 @@
       <workItem from="1659002304830" duration="1772000" />
       <workItem from="1659004312607" duration="276000" />
       <workItem from="1659057210308" duration="8141000" />
-      <workItem from="1659066536184" duration="2299000" />
+      <workItem from="1659066536184" duration="11439000" />
+      <workItem from="1659087646789" duration="2834000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1657507877929</created>
@@ -381,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659003997858</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix logic and check by Event + timeAccess">
+      <created>1659068844478</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1659068844478</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,7 +405,8 @@
     <MESSAGE value="check file replaced by checkSum" />
     <MESSAGE value="add case check file replaced by WatchService" />
     <MESSAGE value="fix logic and check by Sum" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix logic and check by Sum" />
+    <MESSAGE value="fix logic and check by Event + timeAccess" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix logic and check by Event + timeAccess" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

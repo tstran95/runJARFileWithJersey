@@ -1,7 +1,8 @@
 package com.vn.runjar.constant;
 
 public class Constant {
-    public static final String PATH = "/lib/flyWithMe.jar";
+    public static final String PATH = "app.path";
+    public static final String CONFIG_URL = "/config/app.config";
     public static final String CHECK_SUM_ERROR = "CheckSum has exception!!!!";
     public static final String ALGORITHM = "SHA-256";
     public static final String FORMAT = "%02x";
@@ -22,4 +23,5 @@ public class Constant {
     public static final String ERROR = "01";
     public static final String SUCCESS = "SUCCESS";
     public static final String FAIL = "FAIL";
+    public static final String CONFIG_PERIOD = "app.period";
 }

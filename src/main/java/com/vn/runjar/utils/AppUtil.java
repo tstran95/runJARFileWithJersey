@@ -1,12 +1,15 @@
 package com.vn.runjar.utils;
 
+import com.vn.runjar.config.ClassesConfig;
 import com.vn.runjar.constant.Constant;
 import com.vn.runjar.exception.VNPAYException;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,6 +21,7 @@ import java.nio.file.WatchService;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.Objects;
+import java.util.Properties;
 
 @Slf4j
 public class AppUtil {
@@ -47,7 +51,31 @@ public class AppUtil {
     public static String getPath() {
 //        return Paths.get(Objects.requireNonNull(AppUtil.class.getResource("/")).getPath())
 //                    .getParent().getParent().getParent().getParent() + Constant.PATH;
-        return Constant.PATH_FILE;
+        return AppUtil.getPropertiesValue(Constant.PATH);
+    }
+
+    public static String getPropertiesValue(String key) {
+        try {
+            String path = Objects.requireNonNull(AppUtil.class.getResource("/")).getPath();
+            String url = path.substring(0 , path.lastIndexOf("/target")) + Constant.CONFIG_URL;
+            Properties prop = new Properties();
+            InputStream is = Files.newInputStream(Paths.get(url));
+
+            prop.load(is);
+
+            return prop.getProperty(key);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static long parseLong(String value) {
+        try {
+            return Long.parseLong(value);
+        }catch (NumberFormatException e) {
+            throw new VNPAYException("Can't parse String to Long");
+        }
     }
 
     public static void watchEvent(JedisPool jedisPool) {
