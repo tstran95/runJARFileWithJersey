@@ -9,6 +9,11 @@ import java.util.Objects;
 
 @Slf4j
 public class Validator {
+    /**
+     * Validate input
+     * throw exception when have error
+     * @param classInfo ClassInfo
+     */
     public static void checkInput(ClassInfo classInfo) {
         log.info("Validator checkInput START with request : {}", classInfo);
         if (Objects.isNull(classInfo)) {

@@ -2,6 +2,7 @@ package com.vn.runjar.constant;
 
 public class Constant {
     public static final String PATH = "app.path";
+    public static final String CONFIG_PERIOD = "app.period";
     public static final String CONFIG_URL = "/config/app.config";
     public static final String CHECK_SUM_ERROR = "CheckSum has exception!!!!";
     public static final String ALGORITHM = "SHA-256";
@@ -11,7 +12,6 @@ public class Constant {
     public static final String INVOKE_FALSE = "Can't invoke method!!";
     public static final String CLASS_NOT_FOUND = "Class not found!!!!";
     public static final String JAR_FILE_NAME = "flyWithMe.jar";
-    public static final String PATH_FILE = "/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/lib/flyWithMe.jar";
     public static final String CLASS_NAME = "Bird";
     public static final String KEY_CHECK_CHANGE = "CHECK_CHANGE";
     public static final String CHECK_SUM_STR = "checkSum";
@@ -23,5 +23,6 @@ public class Constant {
     public static final String ERROR = "01";
     public static final String SUCCESS = "SUCCESS";
     public static final String FAIL = "FAIL";
-    public static final String CONFIG_PERIOD = "app.period";
+    public static final String PARSE_STRING_TO_LONG_ERROR = "Can't parse String to Long";
+    public static final String IOEXCEPTION = "IOException";
 }

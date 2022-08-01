@@ -5,7 +5,6 @@ import com.vn.runjar.schedule.MyTaskTimer;
 import com.vn.runjar.utils.AppUtil;
 
 import java.util.Date;
-import java.util.Objects;
 import java.util.Timer;
 
 public class Main {

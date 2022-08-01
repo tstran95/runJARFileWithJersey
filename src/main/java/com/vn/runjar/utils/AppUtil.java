@@ -1,13 +1,11 @@
 package com.vn.runjar.utils;
 
-import com.vn.runjar.config.ClassesConfig;
 import com.vn.runjar.constant.Constant;
 import com.vn.runjar.exception.VNPAYException;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystems;
@@ -25,6 +23,13 @@ import java.util.Properties;
 
 @Slf4j
 public class AppUtil {
+
+    /**
+     * reads data from file and encrypt file to String
+     * Each file has only 1 hex String
+     * @param  path String
+     * @return String
+     */
     public static String checkSum(String path) {
         log.info("AppUtil checkSum START with PATH :  {}", path);
         StringBuilder result = new StringBuilder();
@@ -48,13 +53,22 @@ public class AppUtil {
         return result.toString();
     }
 
+    /**
+     * get Path of file lib(JAR)
+     * @return String pathURL
+     */
     public static String getPath() {
-//        return Paths.get(Objects.requireNonNull(AppUtil.class.getResource("/")).getPath())
-//                    .getParent().getParent().getParent().getParent() + Constant.PATH;
         return AppUtil.getPropertiesValue(Constant.PATH);
     }
 
+    /**
+     * get value from file config
+     * @param key String
+     * @return String
+     */
     public static String getPropertiesValue(String key) {
+        log.info("AppUtil getPropertiesValue() START with request : {}" , key);
+        String result;
         try {
             String path = Objects.requireNonNull(AppUtil.class.getResource("/")).getPath();
             String url = path.substring(0 , path.lastIndexOf("/target")) + Constant.CONFIG_URL;
@@ -62,22 +76,36 @@ public class AppUtil {
             InputStream is = Files.newInputStream(Paths.get(url));
 
             prop.load(is);
-
-            return prop.getProperty(key);
+            result = prop.getProperty(key);
+            log.info("AppUtil getPropertiesValue() END with response : {}" , result);
+            return result;
         }catch (Exception e) {
-            e.printStackTrace();
+            log.info("AppUtil getPropertiesValue() ERROR with exception : " , e);
+            throw new VNPAYException(e.getMessage());
         }
-        return null;
     }
 
+    /**
+     * parse String to Long
+     * @param value String
+     * @return Long
+     */
     public static long parseLong(String value) {
+        log.info("AppUtil parseLong() START with request : {}" , value);
         try {
+            log.info("AppUtil parseLong() END");
             return Long.parseLong(value);
         }catch (NumberFormatException e) {
-            throw new VNPAYException("Can't parse String to Long");
+            log.info("AppUtil parseLong() ERROR with exception : " , e);
+            throw new VNPAYException(Constant.PARSE_STRING_TO_LONG_ERROR);
         }
     }
 
+    /**
+     * Using WatchEvent API, listen event Modify File from windows
+     * and change status in redis
+     * @param jedisPool JedisPool
+     */
     public static void watchEvent(JedisPool jedisPool) {
         log.info("AppUtil watchEvent START");
         try (Jedis jedis = jedisPool.getResource()) {
@@ -86,6 +114,7 @@ public class AppUtil {
 
             WatchService watcher = FileSystems.getDefault().newWatchService();
             Path dir = Paths.get(path).getParent();
+            log.info("AppUtil watchEvent RUN with PATH : {}" , dir);
 
             //register a folder to WatchService to listen modify event in this folder
             dir.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
@@ -108,13 +137,13 @@ public class AppUtil {
                             // if same the name ->> load class again
                             if (Constant.JAR_FILE_NAME.equals(fileName.toString())) {
                                 log.info("AppUtil watchEvent had MODIFIED the FILE NAME : {} ", fileName.getFileName());
-                                System.err.printf("A file %s was modified.%n", fileName.getFileName());
                                 jedis.hset(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR, Constant.STATUS_CHANGED);
                             }
                         }
                     }
                     // if reset() return false, key can't receive new event and break out of loop
                     if (!key.reset()) {
+                        log.info("AppUtil watchEvent run with ERROR : KEY cant Reset");
                         break;
                     }
                 }
@@ -122,7 +151,7 @@ public class AppUtil {
             log.info("AppUtil watchEvent END");
         } catch (IOException e) {
             log.info("AppUtil watchEvent ERROR with exception " , e);
-            e.printStackTrace();
+            throw new VNPAYException(Constant.IOEXCEPTION);
         }
     }
 }
