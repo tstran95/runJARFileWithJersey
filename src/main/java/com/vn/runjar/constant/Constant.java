@@ -25,4 +25,7 @@ public class Constant {
     public static final String FAIL = "FAIL";
     public static final String PARSE_STRING_TO_LONG_ERROR = "Can't parse String to Long";
     public static final String IOEXCEPTION = "IOException";
+    public static final String MAIN_STRING = "main";
+    public static final String APP_STRING = "app";
+    public static final String PROPERTY_NOT_FOUND = "Cant find Property";
 }

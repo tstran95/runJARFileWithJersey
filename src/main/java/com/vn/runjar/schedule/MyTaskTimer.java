@@ -3,6 +3,7 @@ package com.vn.runjar.schedule;
 import com.vn.runjar.config.JedisPoolFactory;
 import com.vn.runjar.constant.Constant;
 import com.vn.runjar.exception.VNPAYException;
+import com.vn.runjar.model.PropertyInfo;
 import com.vn.runjar.utils.AppUtil;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
@@ -20,7 +21,8 @@ public class MyTaskTimer extends TimerTask {
     @Override
     public void run() {
         JedisPool jedisPool = JedisPoolFactory.getInstance();
-        String path = AppUtil.getPath();
+        PropertyInfo.instance(Constant.MAIN_STRING);
+        String path = PropertyInfo.path;
         // check By Sum
         checkBySum(jedisPool, path);
     }

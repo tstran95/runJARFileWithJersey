@@ -1,5 +1,6 @@
 com/vn/runjar/validation/Validator.class
 com/vn/runjar/services/impl/AppServiceImpl.class
+com/vn/runjar/Main.class
 com/vn/runjar/response/Response.class
 com/vn/runjar/response/Response$ResponseBuilder.class
 com/vn/runjar/constant/Constant.class
@@ -8,7 +9,7 @@ com/vn/runjar/config/ClassesConfig.class
 com/vn/runjar/resources/AppResource.class
 com/vn/runjar/exception/VNPAYException.class
 com/vn/runjar/config/JedisPoolFactory.class
+com/vn/runjar/model/PropertyInfo.class
 com/vn/runjar/utils/AppUtil.class
-com/vn/runjar/config/Main.class
 com/vn/runjar/schedule/MyTaskTimer.class
 com/vn/runjar/services/AppService.class

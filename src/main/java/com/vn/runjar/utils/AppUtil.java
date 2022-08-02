@@ -2,10 +2,12 @@ package com.vn.runjar.utils;
 
 import com.vn.runjar.constant.Constant;
 import com.vn.runjar.exception.VNPAYException;
+import com.vn.runjar.model.PropertyInfo;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystems;
@@ -27,7 +29,8 @@ public class AppUtil {
     /**
      * reads data from file and encrypt file to String
      * Each file has only 1 hex String
-     * @param  path String
+     *
+     * @param path String
      * @return String
      */
     public static String checkSum(String path) {
@@ -55,48 +58,64 @@ public class AppUtil {
 
     /**
      * get Path of file lib(JAR)
+     *
      * @return String pathURL
      */
-    public static String getPath() {
-        return AppUtil.getPropertiesValue(Constant.PATH);
+    public static String getPath(String key) {
+        return AppUtil.getPropertiesValue(Constant.PATH , key);
     }
 
     /**
      * get value from file config
+     *
      * @param key String
      * @return String
      */
-    public static String getPropertiesValue(String key) {
-        log.info("AppUtil getPropertiesValue() START with request : {}" , key);
+    public static String getPropertiesValue(String key , String fileName) {
+        log.info("AppUtil getPropertiesValue() START with request : {} , {}", key , fileName);
         String result;
         try {
             String path = Objects.requireNonNull(AppUtil.class.getResource("/")).getPath();
-            String url = path.substring(0 , path.lastIndexOf("/target")) + Constant.CONFIG_URL;
+            log.info("AppUtil getPropertiesValue() PATH : {}", path);
+            String url;
+            Path pathStr = Paths.get(path).getParent().getParent().getParent().getParent();
+
+            if ("main".equals(fileName)) {
+                String urlSub = pathStr.getParent().getParent().getParent().toString();
+                url = urlSub.substring(urlSub.indexOf("/")) + Constant.CONFIG_URL;
+                log.info("AppUtil getPropertiesValue() URL with main param: {}", url);
+            }else {
+                url = pathStr.toString() + Constant.CONFIG_URL;
+            }
+
             Properties prop = new Properties();
             InputStream is = Files.newInputStream(Paths.get(url));
 
+            log.info("AppUtil getPropertiesValue() RUNNING with InputStream : {}", is);
+
             prop.load(is);
             result = prop.getProperty(key);
-            log.info("AppUtil getPropertiesValue() END with response : {}" , result);
+            log.info("AppUtil getPropertiesValue() END with response : {}", result);
             return result;
-        }catch (Exception e) {
-            log.info("AppUtil getPropertiesValue() ERROR with exception : " , e);
+        } catch (Exception e) {
+            log.info("AppUtil getPropertiesValue() ERROR with exception : ", e);
             throw new VNPAYException(e.getMessage());
         }
     }
 
     /**
      * parse String to Long
+     *
      * @param value String
      * @return Long
      */
     public static long parseLong(String value) {
-        log.info("AppUtil parseLong() START with request : {}" , value);
+        log.info("AppUtil parseLong() START with request : {}", value);
         try {
             log.info("AppUtil parseLong() END");
             return Long.parseLong(value);
-        }catch (NumberFormatException e) {
-            log.info("AppUtil parseLong() ERROR with exception : " , e);
+        } catch (NumberFormatException e) {
+            log.info("AppUtil parseLong() ERROR with exception : ", e);
             throw new VNPAYException(Constant.PARSE_STRING_TO_LONG_ERROR);
         }
     }
@@ -104,17 +123,19 @@ public class AppUtil {
     /**
      * Using WatchEvent API, listen event Modify File from windows
      * and change status in redis
+     *
      * @param jedisPool JedisPool
      */
     public static void watchEvent(JedisPool jedisPool) {
         log.info("AppUtil watchEvent START");
         try (Jedis jedis = jedisPool.getResource()) {
             WatchKey key;
-            String path = AppUtil.getPath();
+            PropertyInfo.instance(Constant.MAIN_STRING);
+            String path = PropertyInfo.path;
 
             WatchService watcher = FileSystems.getDefault().newWatchService();
             Path dir = Paths.get(path).getParent();
-            log.info("AppUtil watchEvent RUN with PATH : {}" , dir);
+            log.info("AppUtil watchEvent RUN with PATH : {}", dir);
 
             //register a folder to WatchService to listen modify event in this folder
             dir.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
@@ -150,7 +171,7 @@ public class AppUtil {
             }
             log.info("AppUtil watchEvent END");
         } catch (IOException e) {
-            log.info("AppUtil watchEvent ERROR with exception " , e);
+            log.info("AppUtil watchEvent ERROR with exception ", e);
             throw new VNPAYException(Constant.IOEXCEPTION);
         }
     }

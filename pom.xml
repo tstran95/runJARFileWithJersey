@@ -8,7 +8,7 @@
     <artifactId>runJar</artifactId>
     <version>1.0</version>
     <name>runJAR</name>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -100,7 +100,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.vn.runjar.config.Main</mainClass>
+                            <mainClass>com.vn.runjar.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

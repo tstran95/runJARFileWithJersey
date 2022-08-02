@@ -20,8 +20,9 @@ public class ClassesConfig {
     public static Class<?> getCurrentClass(String className , boolean status , String path) {
         log.info("ClassesConfig getCurrentClass START with ClassName : {}" , className);
         try {
+            log.info("ClassesConfig getCurrentClass with PATH FILE  : {}" , path);
             File fileName = new File(path);
-            log.info("ClassesConfig getCurrentClass with PATH FILE  : {}" , fileName);
+            log.info("ClassesConfig getCurrentClass with FILE NAME : {}" , fileName);
             // get class loader parent
             ClassLoader parent = ClassesConfig.class.getClassLoader();
             // get url of file

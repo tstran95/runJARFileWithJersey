@@ -6,8 +6,9 @@
 /home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java
 /home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/src/main/java/com/vn/runjar/utils/AppUtil.java
 /home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/src/main/java/com/vn/runjar/exception/VNPAYException.java
-/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/src/main/java/com/vn/runjar/config/Main.java
 /home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java
+/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/src/main/java/com/vn/runjar/model/PropertyInfo.java
 /home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/src/main/java/com/vn/runjar/model/ClassInfo.java
 /home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/src/main/java/com/vn/runjar/resources/AppResource.java
+/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/src/main/java/com/vn/runjar/Main.java
 /home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/src/main/java/com/vn/runjar/services/AppService.java

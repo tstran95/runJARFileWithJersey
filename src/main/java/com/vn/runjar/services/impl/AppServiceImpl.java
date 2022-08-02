@@ -1,14 +1,14 @@
 package com.vn.runjar.services.impl;
 
+import com.vn.runjar.Main;
 import com.vn.runjar.config.ClassesConfig;
 import com.vn.runjar.config.JedisPoolFactory;
-import com.vn.runjar.config.Main;
 import com.vn.runjar.constant.Constant;
 import com.vn.runjar.exception.VNPAYException;
 import com.vn.runjar.model.ClassInfo;
+import com.vn.runjar.model.PropertyInfo;
 import com.vn.runjar.response.Response;
 import com.vn.runjar.services.AppService;
-import com.vn.runjar.utils.AppUtil;
 import com.vn.runjar.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.jvnet.hk2.annotations.Service;
@@ -41,17 +41,17 @@ public class AppServiceImpl implements AppService {
      * run method into jar file
      */
     public Response run(ClassInfo classInfo) {
-        log.info("AppServiceImpl method run START with request {}", classInfo);
-        String path = AppUtil.getPath();
+        log.info("AppServiceImpl method run() START with request {}", classInfo);
+        PropertyInfo.instance(Constant.APP_STRING);
+        String path = PropertyInfo.path;
         JedisPool jedisPool = JedisPoolFactory.getInstance();
-        //the first time, load class
-
         //the next time, check data in redis : if file jar was modified, load class again
         try (Jedis jedis = jedisPool.getResource()) {
             // validate input
             Validator.checkInput(classInfo);
             // load Class from Main
-            Class<?> classLoaded = Main.clazz;
+            Class<?> classLoaded = Main.initClass();
+            log.info("AppServiceImpl method run() RUNNING with Class {}", classLoaded);
 
             String status = jedis.hget(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR);
             log.info("STATUS IN REDIS : {}", status);
@@ -62,14 +62,14 @@ public class AppServiceImpl implements AppService {
                 // set value for class in Main
                 jedis.hset(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR, Constant.STATUS_DEFAULT);
                 Main.changeValueClass(classLoaded);
-                log.info("CHANGE THE FILE");
+                log.info("THE FILE HAD BEEN CHANGED");
             }
             //invoke method into jar file
             this.invokeMethod(classLoaded, classInfo.getMethodName());
-            log.info("AppServiceImpl method run END with request {}", classInfo);
+            log.info("AppServiceImpl method run() END with request {}", classInfo);
             return Response.getResponse(Constant.OK, Constant.SUCCESS);
         } catch (Exception e) {
-            log.info("AppServiceImpl method run ERROR with error ", e);
+            log.info("AppServiceImpl method run() ERROR with error ", e);
             return Response.getResponse(Constant.ERROR, e.getMessage());
         }
     }
@@ -87,7 +87,7 @@ public class AppServiceImpl implements AppService {
             Object instance = classLoaded.getDeclaredConstructor().newInstance();
             // and run method in this class
             method.invoke(instance);
-            log.info("AppServiceImpl method private of fly() END");
+            log.info("AppServiceImpl method private of fly() END with Object : {}", method.invoke(instance));
         } catch (Exception e) {
             log.error("AppServiceImpl method private of fly() ERROR With MESSAGE ", e);
             throw new VNPAYException(Constant.INVOKE_FALSE);
