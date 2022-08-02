@@ -65,12 +65,12 @@ public class AppServiceImpl implements AppService {
                 log.info("THE FILE HAD BEEN CHANGED");
             }
             //invoke method into jar file
-            this.invokeMethod(classLoaded, classInfo.getMethodName());
+            String message = this.invokeMethod(classLoaded, classInfo.getMethodName());
             log.info("AppServiceImpl method run() END with request {}", classInfo);
-            return Response.getResponse(Constant.OK, Constant.SUCCESS);
+            return Response.getResponse(Constant.OK, Constant.SUCCESS , message);
         } catch (Exception e) {
             log.info("AppServiceImpl method run() ERROR with error ", e);
-            return Response.getResponse(Constant.ERROR, e.getMessage());
+            return Response.getResponse(Constant.ERROR, e.getMessage() , Constant.FAIL);
         }
     }
 
@@ -78,16 +78,18 @@ public class AppServiceImpl implements AppService {
     /**
      * Run method in JAR file
      */
-    private void invokeMethod(Class<?> classLoaded, String classMethod) {
+    private String invokeMethod(Class<?> classLoaded, String classMethod) {
         log.info("AppServiceImpl method private of fly() START");
         try {
+            String result;
             // get Method in class by name
             Method method = classLoaded.getDeclaredMethod(classMethod);
             // create instance of class
             Object instance = classLoaded.getDeclaredConstructor().newInstance();
             // and run method in this class
-            method.invoke(instance);
-            log.info("AppServiceImpl method private of fly() END with Object : {}", method.invoke(instance));
+            result = (String) method.invoke(instance);
+            log.info("AppServiceImpl method private of fly() END with Object : {}", result);
+            return result;
         } catch (Exception e) {
             log.error("AppServiceImpl method private of fly() ERROR With MESSAGE ", e);
             throw new VNPAYException(Constant.INVOKE_FALSE);

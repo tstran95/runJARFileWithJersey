@@ -29,12 +29,12 @@ public class PropertyInfo {
             String urlSub;
             if (Constant.MAIN_STRING.equals(key)) {
                 urlSub = pathStr.getParent().getParent().getParent().toString();
-//            url = "/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/" + Constant.CONFIG_URL;
             } else {
                 urlSub = pathStr.toString();
                 log.info("PropertyInfo constructor() URL SUB with main param: {}", urlSub);
             }
-            url = urlSub.substring(urlSub.indexOf("/")) + Constant.CONFIG_URL;
+//            url = urlSub.substring(urlSub.indexOf("/")) + Constant.CONFIG_URL;
+            url = "/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/" + Constant.CONFIG_URL;
             log.info("PropertyInfo constructor() URL SUB with main param : {} , {}", url, key);
 
             InputStream is = Files.newInputStream(Paths.get(url));

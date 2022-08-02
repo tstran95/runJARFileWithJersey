@@ -57,53 +57,6 @@ public class AppUtil {
     }
 
     /**
-     * get Path of file lib(JAR)
-     *
-     * @return String pathURL
-     */
-    public static String getPath(String key) {
-        return AppUtil.getPropertiesValue(Constant.PATH , key);
-    }
-
-    /**
-     * get value from file config
-     *
-     * @param key String
-     * @return String
-     */
-    public static String getPropertiesValue(String key , String fileName) {
-        log.info("AppUtil getPropertiesValue() START with request : {} , {}", key , fileName);
-        String result;
-        try {
-            String path = Objects.requireNonNull(AppUtil.class.getResource("/")).getPath();
-            log.info("AppUtil getPropertiesValue() PATH : {}", path);
-            String url;
-            Path pathStr = Paths.get(path).getParent().getParent().getParent().getParent();
-
-            if ("main".equals(fileName)) {
-                String urlSub = pathStr.getParent().getParent().getParent().toString();
-                url = urlSub.substring(urlSub.indexOf("/")) + Constant.CONFIG_URL;
-                log.info("AppUtil getPropertiesValue() URL with main param: {}", url);
-            }else {
-                url = pathStr.toString() + Constant.CONFIG_URL;
-            }
-
-            Properties prop = new Properties();
-            InputStream is = Files.newInputStream(Paths.get(url));
-
-            log.info("AppUtil getPropertiesValue() RUNNING with InputStream : {}", is);
-
-            prop.load(is);
-            result = prop.getProperty(key);
-            log.info("AppUtil getPropertiesValue() END with response : {}", result);
-            return result;
-        } catch (Exception e) {
-            log.info("AppUtil getPropertiesValue() ERROR with exception : ", e);
-            throw new VNPAYException(e.getMessage());
-        }
-    }
-
-    /**
      * parse String to Long
      *
      * @param value String

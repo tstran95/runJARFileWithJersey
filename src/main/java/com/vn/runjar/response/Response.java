@@ -16,11 +16,13 @@ import lombok.Setter;
 public class Response {
     private String code;
     private String description;
+    private String message;
 
-    public static Response getResponse(String code, String description) {
+    public static Response getResponse(String code, String description , String message) {
         return Response.builder()
                         .code(code)
                         .description(description)
+                        .message(message)
                         .build();
     }
 
@@ -29,6 +31,7 @@ public class Response {
         return Response.builder()
                 .code(Constant.ERROR)
                 .description(Constant.FAIL)
+                .message(null)
                 .build();
     }
 }

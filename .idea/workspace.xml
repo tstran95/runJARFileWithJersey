@@ -9,26 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="add way to get dynamic url and read file config">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/model/PropertyInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/runJar_war.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/runJar_war.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/runJar_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/runJar_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+    <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="fix logic dont reload PropertyInfo and Clazz">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/flyWithMe.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flyWithMe.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/ClassesConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/ClassesConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/config/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/model/PropertyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/model/PropertyInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/response/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/response/Response.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/runJar-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/runJar-1.0-SNAPSHOT/WEB-INF/web.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -349,7 +337,7 @@
       <workItem from="1659429932426" duration="683000" />
       <workItem from="1659430678407" duration="1775000" />
       <workItem from="1659432544665" duration="1424000" />
-      <workItem from="1659434382785" duration="304000" />
+      <workItem from="1659434382785" duration="1995000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1657507877929</created>
@@ -421,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659090729580</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix logic dont reload PropertyInfo and Clazz">
+      <created>1659434750158</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1659434750158</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +442,8 @@
     <MESSAGE value="fix logic and check by Sum" />
     <MESSAGE value="fix logic and check by Event + timeAccess" />
     <MESSAGE value="add way to get dynamic url and read file config" />
-    <option name="LAST_COMMIT_MESSAGE" value="add way to get dynamic url and read file config" />
+    <MESSAGE value="fix logic dont reload PropertyInfo and Clazz" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix logic dont reload PropertyInfo and Clazz" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
