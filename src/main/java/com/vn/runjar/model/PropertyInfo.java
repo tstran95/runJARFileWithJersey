@@ -2,7 +2,6 @@ package com.vn.runjar.model;
 
 import com.vn.runjar.constant.Constant;
 import com.vn.runjar.exception.VNPAYException;
-import com.vn.runjar.services.impl.AppServiceImpl;
 import com.vn.runjar.utils.AppUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,10 +30,9 @@ public class PropertyInfo {
                 urlSub = pathStr.getParent().getParent().getParent().toString();
             } else {
                 urlSub = pathStr.toString();
-                log.info("PropertyInfo constructor() URL SUB with main param: {}", urlSub);
             }
-//            url = urlSub.substring(urlSub.indexOf("/")) + Constant.CONFIG_URL;
-            url = "/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/" + Constant.CONFIG_URL;
+            url = urlSub.substring(urlSub.indexOf("/")) + Constant.CONFIG_URL;
+//            url = "/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/" + Constant.CONFIG_URL;
             log.info("PropertyInfo constructor() URL SUB with main param : {} , {}", url, key);
 
             InputStream is = Files.newInputStream(Paths.get(url));
@@ -44,15 +42,18 @@ public class PropertyInfo {
             period = props.getProperty(Constant.CONFIG_PERIOD);
             log.info("PropertyInfo constructor() END");
         } catch (Exception e) {
+            log.info("PropertyInfo constructor() ERROR with Exception " , e);
             throw new VNPAYException(Constant.PROPERTY_NOT_FOUND);
         }
     }
 
-    public static PropertyInfo instance(String key) {
+    public static void instance(String key) {
+        log.info("PropertyInfo instance() START");
         if (_instance == null) {
             _instance = new PropertyInfo();
             initialProperty(key);
+            log.info("PropertyInfo instance() CREATE NEW PROPERTY");
         }
-        return _instance;
+        log.info("PropertyInfo instance() END");
     }
 }

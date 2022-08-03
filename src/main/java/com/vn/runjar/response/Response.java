@@ -17,21 +17,24 @@ public class Response {
     private String code;
     private String description;
     private String message;
+    private String tokenId;
 
-    public static Response getResponse(String code, String description , String message) {
+    public static Response getResponse(String code, String description , String message ,String tokenId) {
         return Response.builder()
                         .code(code)
                         .description(description)
                         .message(message)
+                        .tokenId(tokenId)
                         .build();
     }
 
     @JsonIgnore
-    public static Response responseError() {
+    public static Response responseError(String tokenId) {
         return Response.builder()
                 .code(Constant.ERROR)
                 .description(Constant.FAIL)
                 .message(null)
+                .tokenId(tokenId)
                 .build();
     }
 }

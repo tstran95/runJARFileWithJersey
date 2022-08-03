@@ -67,10 +67,10 @@ public class AppServiceImpl implements AppService {
             //invoke method into jar file
             String message = this.invokeMethod(classLoaded, classInfo.getMethodName());
             log.info("AppServiceImpl method run() END with request {}", classInfo);
-            return Response.getResponse(Constant.OK, Constant.SUCCESS , message);
+            return Response.getResponse(Constant.OK, Constant.SUCCESS , message , classInfo.getTokenID());
         } catch (Exception e) {
             log.info("AppServiceImpl method run() ERROR with error ", e);
-            return Response.getResponse(Constant.ERROR, e.getMessage() , Constant.FAIL);
+            return Response.getResponse(Constant.ERROR, e.getMessage() , Constant.FAIL , classInfo.getTokenID());
         }
     }
 
