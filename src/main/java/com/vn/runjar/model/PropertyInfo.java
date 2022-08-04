@@ -47,13 +47,14 @@ public class PropertyInfo {
         }
     }
 
-    public static void instance(String key) {
-        log.info("PropertyInfo instance() START");
+    public static PropertyInfo instance(String key) {
+        log.info("PropertyInfo instance() START with key {} " , key);
         if (_instance == null) {
             _instance = new PropertyInfo();
             initialProperty(key);
             log.info("PropertyInfo instance() CREATE NEW PROPERTY");
         }
-        log.info("PropertyInfo instance() END");
+        log.info("PropertyInfo instance() END with {}" , _instance.toString() );
+        return _instance;
     }
 }
