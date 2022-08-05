@@ -9,17 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="fix PropertyInfo">
+    <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="add libName to request and fix logic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/model/ClassInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/model/ClassInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/model/PropertyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/model/PropertyInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -346,7 +338,7 @@
       <workItem from="1659585910688" duration="960000" />
       <workItem from="1659603726070" duration="17000" />
       <workItem from="1659604122192" duration="4477000" />
-      <workItem from="1659661470447" duration="6847000" />
+      <workItem from="1659661470447" duration="8366000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1657507877929</created>
@@ -432,7 +424,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659586271315</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add libName to request and fix logic">
+      <created>1659669160975</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1659669160975</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,7 +459,8 @@
     <MESSAGE value="add way to get dynamic url and read file config" />
     <MESSAGE value="fix logic dont reload PropertyInfo and Clazz" />
     <MESSAGE value="fix PropertyInfo" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix PropertyInfo" />
+    <MESSAGE value="add libName to request and fix logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="add libName to request and fix logic" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

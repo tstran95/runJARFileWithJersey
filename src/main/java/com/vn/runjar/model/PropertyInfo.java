@@ -43,6 +43,7 @@ public class PropertyInfo {
             }else {
                 path = props.getProperty(Constant.PATH + "_" + nameLib);
                 props.setProperty(Constant.PATH , path);
+                log.info("PropertyInfo constructor() RUNNING with Message : PATH HAVE CHANGED");
             }
             period = props.getProperty(Constant.CONFIG_PERIOD);
             log.info("PropertyInfo constructor() END");
