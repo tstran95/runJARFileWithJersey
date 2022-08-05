@@ -50,12 +50,18 @@ public class AppServiceImpl implements AppService {
 
             String libName = classInfo.getLibName() == null ? Constant.EMPTY : classInfo.getLibName();
             log.info("AppServiceImpl method run() RUNNING with LibName {}", libName);
-            PropertyInfo.initialProperty(Constant.APP_STRING , libName , classInfo.getClassName());
+            PropertyInfo.instance(Constant.APP_STRING , libName , classInfo.getClassName());
+            boolean statusChangeProp = false;
+            if (!PropertyInfo.clazzName.equals(classInfo.getClassName())) {
+                log.info("CHANGE PROPERTY");
+                PropertyInfo.initialProperty(Constant.APP_STRING , libName , classInfo.getClassName());
+                statusChangeProp = true;
+            }
             String path = PropertyInfo.path;
             log.info("AppServiceImpl method run() RUNNING with PATH {}", path);
             // load Class from Main
             log.info("AppServiceImpl method run() RUNNING with ClassNAME {}", PropertyInfo.clazzName);
-            Class<?> classLoaded = Main.initClass(Constant.APP_STRING ,libName , PropertyInfo.clazzName);
+            Class<?> classLoaded = Main.initClass(Constant.APP_STRING ,libName , PropertyInfo.clazzName , statusChangeProp);
             log.info("AppServiceImpl method run() RUNNING with Class {}", classLoaded);
 
             String status = jedis.hget(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR);
