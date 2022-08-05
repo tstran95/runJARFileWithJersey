@@ -21,15 +21,19 @@ public class MyTaskTimer extends TimerTask {
     public static boolean status = false;
     @Override
     public void run() {
+        log.info("MyTaskTimer run() START");
         JedisPool jedisPool = JedisPoolFactory.getInstance();
-        PropertyInfo.instance(Constant.MAIN_STRING , Constant.EMPTY, Constant.EMPTY);
-        if (status) {
-            PropertyInfo.initialProperty(Constant.MAIN_STRING , Constant.EMPTY, Constant.EMPTY);
-            status = false;
-        }
+//        PropertyInfo.instance(Constant.MAIN_STRING , Constant.EMPTY, Constant.EMPTY);
+//        log.info("MyTaskTimer run() RUNNING with Status {}" , status);
+//        if (status) {
+//            log.info("MyTaskTimer run() RUNNING with Status had CHANGE");
+//            status = false;
+//        }
+        PropertyInfo.initialProperty(Constant.MAIN_STRING , Constant.EMPTY, Constant.EMPTY);
         String path = PropertyInfo.path;
         // check By Sum
         checkBySum(jedisPool, path);
+        log.info("MyTaskTimer run() END");
     }
 
     /**
