@@ -42,9 +42,11 @@ public class MyTaskTimer extends TimerTask {
         String hexStr = AppUtil.checkSum(path);
         try (Jedis jedis = jedisPool.getResource()) {
             String hexSaved = jedis.hget(Constant.KEY_CHECK_CHANGE, Constant.CHECK_SUM_STR);
+            log.info("MyTaskTimer checkBySum END with OLD HEX {}", hexSaved);
             if (!hexStr.equals(hexSaved)) {
                 jedis.hset(Constant.KEY_CHECK_CHANGE, Constant.CHECK_SUM_STR, hexStr);
                 jedis.hset(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR, Constant.STATUS_CHANGED);
+                log.info("MyTaskTimer checkBySum RUNNING with message STATUS HAD CHANGE");
             }
             log.info("MyTaskTimer checkBySum END with HEX_STRING {}", hexStr);
         }
