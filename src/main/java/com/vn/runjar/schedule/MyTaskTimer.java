@@ -18,10 +18,15 @@ import java.util.TimerTask;
 
 @Slf4j
 public class MyTaskTimer extends TimerTask {
+    public static boolean status = false;
     @Override
     public void run() {
         JedisPool jedisPool = JedisPoolFactory.getInstance();
         PropertyInfo.instance(Constant.MAIN_STRING , Constant.EMPTY, Constant.EMPTY);
+        if (status) {
+            PropertyInfo.initialProperty(Constant.MAIN_STRING , Constant.EMPTY, Constant.EMPTY);
+            status = false;
+        }
         String path = PropertyInfo.path;
         // check By Sum
         checkBySum(jedisPool, path);

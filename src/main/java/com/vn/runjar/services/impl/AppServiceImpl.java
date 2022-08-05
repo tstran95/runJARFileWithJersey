@@ -8,6 +8,7 @@ import com.vn.runjar.exception.VNPAYException;
 import com.vn.runjar.model.ClassInfo;
 import com.vn.runjar.model.PropertyInfo;
 import com.vn.runjar.response.Response;
+import com.vn.runjar.schedule.MyTaskTimer;
 import com.vn.runjar.services.AppService;
 import com.vn.runjar.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +57,7 @@ public class AppServiceImpl implements AppService {
                 log.info("CHANGE PROPERTY");
                 PropertyInfo.initialProperty(Constant.APP_STRING , libName , classInfo.getClassName());
                 statusChangeProp = true;
+                MyTaskTimer.status = true;
             }
             String path = PropertyInfo.path;
             log.info("AppServiceImpl method run() RUNNING with PATH {}", path);
