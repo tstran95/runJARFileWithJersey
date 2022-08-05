@@ -21,7 +21,7 @@ public class MyTaskTimer extends TimerTask {
     @Override
     public void run() {
         JedisPool jedisPool = JedisPoolFactory.getInstance();
-        PropertyInfo.instance(Constant.MAIN_STRING);
+        PropertyInfo.instance(Constant.MAIN_STRING , Constant.EMPTY);
         String path = PropertyInfo.path;
         // check By Sum
         checkBySum(jedisPool, path);

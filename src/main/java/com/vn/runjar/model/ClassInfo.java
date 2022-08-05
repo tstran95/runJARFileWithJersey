@@ -13,4 +13,5 @@ public class ClassInfo {
     private String className;
     private String methodName;
     private String tokenID;
+    private String libName;
 }

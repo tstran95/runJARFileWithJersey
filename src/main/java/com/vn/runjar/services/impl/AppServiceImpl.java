@@ -42,15 +42,19 @@ public class AppServiceImpl implements AppService {
      */
     public Response run(ClassInfo classInfo) {
         log.info("AppServiceImpl method run() START with request {}", classInfo);
-        PropertyInfo.instance(Constant.APP_STRING);
-        String path = PropertyInfo.path;
-        JedisPool jedisPool = JedisPoolFactory.getInstance();
         //the next time, check data in redis : if file jar was modified, load class again
+        JedisPool jedisPool = JedisPoolFactory.getInstance();
         try (Jedis jedis = jedisPool.getResource()) {
             // validate input
             Validator.checkInput(classInfo);
+
+            String libName = classInfo.getLibName() == null ? Constant.EMPTY : classInfo.getLibName();
+            log.info("AppServiceImpl method run() RUNNING with LibName {}", libName);
+            PropertyInfo.instance(Constant.APP_STRING , libName);
+            String path = PropertyInfo.path;
+            log.info("AppServiceImpl method run() RUNNING with PATH {}", path);
             // load Class from Main
-            Class<?> classLoaded = Main.initClass();
+            Class<?> classLoaded = Main.initClass(libName);
             log.info("AppServiceImpl method run() RUNNING with Class {}", classLoaded);
 
             String status = jedis.hget(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR);

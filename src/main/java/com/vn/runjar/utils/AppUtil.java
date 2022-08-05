@@ -7,9 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,7 +19,6 @@ import java.nio.file.WatchService;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.Objects;
-import java.util.Properties;
 
 @Slf4j
 public class AppUtil {
@@ -83,7 +80,7 @@ public class AppUtil {
         log.info("AppUtil watchEvent START");
         try (Jedis jedis = jedisPool.getResource()) {
             WatchKey key;
-            PropertyInfo.instance(Constant.MAIN_STRING);
+            PropertyInfo.instance(Constant.MAIN_STRING , Constant.EMPTY);
             String path = PropertyInfo.path;
 
             WatchService watcher = FileSystems.getDefault().newWatchService();

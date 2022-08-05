@@ -27,4 +27,5 @@ public class Constant {
     public static final String MAIN_STRING = "main";
     public static final String APP_STRING = "app";
     public static final String PROPERTY_NOT_FOUND = "Cant find Property";
+    public static final String EMPTY = "";
 }

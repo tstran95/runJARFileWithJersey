@@ -16,8 +16,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        PropertyInfo.instance(Constant.MAIN_STRING);
-        initClass();
+        PropertyInfo.instance(Constant.MAIN_STRING , Constant.EMPTY);
+        initClass(Constant.EMPTY);
         String time = PropertyInfo.period;
         MyTaskTimer schedule = new MyTaskTimer();
         // creating timer task, timer
@@ -33,10 +33,10 @@ public class Main {
         clazz = clazzNew;
     }
 
-    public static Class<?> initClass() {
+    public static Class<?> initClass(String libName) {
         log.info("MAIN initClass() START");
         if (clazz == null) {
-            PropertyInfo.instance(Constant.MAIN_STRING);
+            PropertyInfo.instance(Constant.MAIN_STRING , libName);
             log.info("MAIN initClass() with Property PATH : {}" , PropertyInfo.path);
             clazz = ClassesConfig.getCurrentClass(Constant.CLASS_NAME,
                     true,

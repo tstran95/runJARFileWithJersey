@@ -18,7 +18,7 @@ public class PropertyInfo {
     public static String path = null;
     public static String period = null;
 
-    public static void initialProperty(String key) {
+    public static void initialProperty(String key , String nameLib) {
         try {
             log.info("PropertyInfo constructor() START");
             String pathParent = Objects.requireNonNull(AppUtil.class.getResource("/")).getPath();
@@ -38,7 +38,12 @@ public class PropertyInfo {
             InputStream is = Files.newInputStream(Paths.get(url));
             Properties props = new Properties();
             props.load(is);
-            path = props.getProperty(Constant.PATH);
+            if (Constant.EMPTY.equals(nameLib)){
+                path = props.getProperty(Constant.PATH);
+            }else {
+                path = props.getProperty(Constant.PATH + "_" + nameLib);
+                props.setProperty(Constant.PATH , path);
+            }
             period = props.getProperty(Constant.CONFIG_PERIOD);
             log.info("PropertyInfo constructor() END");
         } catch (Exception e) {
@@ -47,11 +52,11 @@ public class PropertyInfo {
         }
     }
 
-    public static PropertyInfo instance(String key) {
+    public static PropertyInfo instance(String key , String libName) {
         log.info("PropertyInfo instance() START with key {} " , key);
         if (_instance == null) {
             _instance = new PropertyInfo();
-            initialProperty(key);
+            initialProperty(key , libName);
             log.info("PropertyInfo instance() CREATE NEW PROPERTY");
         }
         log.info("PropertyInfo instance() END with {}" , _instance.toString() );
