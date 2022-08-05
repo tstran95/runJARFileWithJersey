@@ -35,9 +35,9 @@ public class Main {
 
     public static Class<?> initClass(String libName , String className) {
         log.info("MAIN initClass() START");
-        if (clazz == null) {
-            PropertyInfo.instance(Constant.MAIN_STRING , libName , className);
-            log.info("MAIN initClass() with Property PATH : {}" , PropertyInfo.path);
+        if (clazz == null || !PropertyInfo.clazzName.equals(className)) {
+            PropertyInfo.initialProperty(Constant.MAIN_STRING , libName , className);
+            log.info("MAIN initClass() with Property CLASS NAME : {}" , PropertyInfo.clazzName);
             clazz = ClassesConfig.getCurrentClass(PropertyInfo.clazzName,
                     true,
                     PropertyInfo.path);
