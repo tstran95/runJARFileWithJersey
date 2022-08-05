@@ -9,9 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="add libName to request and fix logic">
+    <list default="true" id="a445ef43-ea7e-435c-a996-e93c521320d3" name="Changes" comment="add runningLib.jar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.config" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/constant/Constant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/model/PropertyInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/model/PropertyInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/schedule/MyTaskTimer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/services/impl/AppServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/vn/runjar/utils/AppUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -338,7 +344,7 @@
       <workItem from="1659585910688" duration="960000" />
       <workItem from="1659603726070" duration="17000" />
       <workItem from="1659604122192" duration="4477000" />
-      <workItem from="1659661470447" duration="8366000" />
+      <workItem from="1659661470447" duration="10813000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1657507877929</created>
@@ -431,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659669160975</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="add runningLib.jar">
+      <created>1659670905995</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1659670905995</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,7 +473,8 @@
     <MESSAGE value="fix logic dont reload PropertyInfo and Clazz" />
     <MESSAGE value="fix PropertyInfo" />
     <MESSAGE value="add libName to request and fix logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="add libName to request and fix logic" />
+    <MESSAGE value="add runningLib.jar" />
+    <option name="LAST_COMMIT_MESSAGE" value="add runningLib.jar" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

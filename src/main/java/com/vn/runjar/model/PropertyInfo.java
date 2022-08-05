@@ -17,8 +17,9 @@ public class PropertyInfo {
     private static PropertyInfo _instance = null;
     public static String path = null;
     public static String period = null;
+    public static String clazzName = null;
 
-    public static void initialProperty(String key , String nameLib) {
+    public static void initialProperty(String key , String nameLib , String className) {
         try {
             log.info("PropertyInfo constructor() START");
             String pathParent = Objects.requireNonNull(AppUtil.class.getResource("/")).getPath();
@@ -46,6 +47,10 @@ public class PropertyInfo {
                 log.info("PropertyInfo constructor() RUNNING with Message : PATH HAVE CHANGED");
             }
             period = props.getProperty(Constant.CONFIG_PERIOD);
+            if (!Constant.EMPTY.equals(className)) {
+                props.setProperty(Constant.CONFIG_CLASS , className);
+            }
+            clazzName = props.getProperty(Constant.CONFIG_CLASS);
             log.info("PropertyInfo constructor() END");
         } catch (Exception e) {
             log.info("PropertyInfo constructor() ERROR with Exception " , e);
@@ -53,11 +58,11 @@ public class PropertyInfo {
         }
     }
 
-    public static PropertyInfo instance(String key , String libName) {
+    public static PropertyInfo instance(String key , String libName ,String className) {
         log.info("PropertyInfo instance() START with key {} " , key);
         if (_instance == null) {
             _instance = new PropertyInfo();
-            initialProperty(key , libName);
+            initialProperty(key , libName , className);
             log.info("PropertyInfo instance() CREATE NEW PROPERTY");
         }
         log.info("PropertyInfo instance() END with {}" , _instance.toString() );

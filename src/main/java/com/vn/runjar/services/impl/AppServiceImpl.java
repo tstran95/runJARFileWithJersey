@@ -50,18 +50,18 @@ public class AppServiceImpl implements AppService {
 
             String libName = classInfo.getLibName() == null ? Constant.EMPTY : classInfo.getLibName();
             log.info("AppServiceImpl method run() RUNNING with LibName {}", libName);
-            PropertyInfo.instance(Constant.APP_STRING , libName);
+            PropertyInfo.instance(Constant.APP_STRING , libName , classInfo.getClassName());
             String path = PropertyInfo.path;
             log.info("AppServiceImpl method run() RUNNING with PATH {}", path);
             // load Class from Main
-            Class<?> classLoaded = Main.initClass(libName);
+            Class<?> classLoaded = Main.initClass(libName , PropertyInfo.clazzName);
             log.info("AppServiceImpl method run() RUNNING with Class {}", classLoaded);
 
             String status = jedis.hget(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR);
             log.info("STATUS IN REDIS : {}", status);
             if (Constant.STATUS_CHANGED.equals(status)) {
                 // load class again
-                classLoaded = ClassesConfig.getCurrentClass(classInfo.getClassName(), false, path);
+                classLoaded = ClassesConfig.getCurrentClass(PropertyInfo.clazzName, false, path);
                 // and set status in redis is 'not change: 0'
                 // set value for class in Main
                 jedis.hset(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR, Constant.STATUS_DEFAULT);
