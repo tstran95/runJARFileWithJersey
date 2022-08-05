@@ -7,7 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,6 +24,8 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Slf4j
@@ -123,6 +131,48 @@ public class AppUtil {
         } catch (IOException e) {
             log.info("AppUtil watchEvent ERROR with exception ", e);
             throw new VNPAYException(Constant.IOEXCEPTION);
+        }
+    }
+
+    public static void readAndWriteFileProps(String path , String nameLib) {
+        try {
+            FileReader reader = new FileReader(path);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+            String line;
+            StringBuilder str = new StringBuilder();
+
+            while ((line = bufferedReader.readLine()) != null) {
+                str.append(line);
+                str.append("\n");
+            }
+            reader.close();
+
+            String[] arrayList = str.toString().split("\n");
+            Map<String , String> map = new HashMap<>();
+            for (String strTemp : arrayList) {
+                map.put((strTemp.substring(0 , (strTemp.indexOf("=") - 1))) , strTemp.substring(strTemp.indexOf("=") +2));
+            }
+            String lib = "app.path" + "_" + nameLib;
+            map.put("app.path" , map.get(nameLib));
+            StringBuilder doc = new StringBuilder();
+            for (String key : map.keySet()) {
+                doc.append(key);
+                doc.append( " = " );
+                doc.append(map.get(key));
+                doc.append("\n");
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(path);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
+            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
+
+            bufferedWriter.write(doc.toString());
+
+            bufferedWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
