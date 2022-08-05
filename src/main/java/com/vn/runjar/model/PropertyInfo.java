@@ -21,9 +21,9 @@ public class PropertyInfo {
 
     public static void initialProperty(String key , String nameLib , String className) {
         try {
-            log.info("PropertyInfo constructor() START");
+            log.info("PropertyInfo initialProperty() START");
             String pathParent = Objects.requireNonNull(AppUtil.class.getResource("/")).getPath();
-            log.info("PropertyInfo constructor() PATH : {}", pathParent);
+            log.info("PropertyInfo initialProperty() PATH : {}", pathParent);
             Path pathStr = Paths.get(pathParent).getParent().getParent().getParent().getParent();
             String url;
             String urlSub;
@@ -34,25 +34,25 @@ public class PropertyInfo {
             }
             url = urlSub.substring(urlSub.indexOf("/")) + Constant.CONFIG_URL;
 //            url = "/home/tstran95/Public/WS/runtime-jar/runJARFileWithJersey/" + Constant.CONFIG_URL;
-            log.info("PropertyInfo constructor() URL SUB with main param : {} , {}", url, key);
+            log.info("PropertyInfo initialProperty() URL SUB with main param : {} , {}", url, key);
 
             InputStream is = Files.newInputStream(Paths.get(url));
             Properties props = new Properties();
             props.load(is);
             if (!Constant.EMPTY.equals(nameLib)){
                 props.setProperty(Constant.PATH , props.getProperty(Constant.PATH + "_" + nameLib));
-                log.info("PropertyInfo constructor() RUNNING with Message : PATH HAVE CHANGED");
+                log.info("PropertyInfo initialProperty() RUNNING with Message : PATH HAVE CHANGED");
             }
             path = props.getProperty(Constant.PATH);
             period = props.getProperty(Constant.CONFIG_PERIOD);
             if (!Constant.EMPTY.equals(className)) {
                 props.setProperty(Constant.CONFIG_CLASS , className);
-                log.info("PropertyInfo constructor() CHANGE CLASS NAME PROPERTY");
+                log.info("PropertyInfo initialProperty() CHANGE CLASS NAME PROPERTY");
             }
             clazzName = props.getProperty(Constant.CONFIG_CLASS);
-            log.info("PropertyInfo constructor() END");
+            log.info("PropertyInfo initialProperty() END");
         } catch (Exception e) {
-            log.info("PropertyInfo constructor() ERROR with Exception " , e);
+            log.info("PropertyInfo initialProperty() ERROR with Exception " , e);
             throw new VNPAYException(Constant.PROPERTY_NOT_FOUND);
         }
     }
