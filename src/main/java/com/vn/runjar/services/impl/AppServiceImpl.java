@@ -50,7 +50,7 @@ public class AppServiceImpl implements AppService {
 
             String libName = classInfo.getLibName() == null ? Constant.EMPTY : classInfo.getLibName();
             log.info("AppServiceImpl method run() RUNNING with LibName {}", libName);
-            PropertyInfo.instance(Constant.APP_STRING , libName , classInfo.getClassName());
+            PropertyInfo.initialProperty(Constant.APP_STRING , libName , classInfo.getClassName());
             String path = PropertyInfo.path;
             log.info("AppServiceImpl method run() RUNNING with PATH {}", path);
             // load Class from Main
