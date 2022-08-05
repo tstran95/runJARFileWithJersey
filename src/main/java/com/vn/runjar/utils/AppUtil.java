@@ -153,8 +153,8 @@ public class AppUtil {
             for (String strTemp : arrayList) {
                 map.put((strTemp.substring(0 , (strTemp.indexOf("=") - 1))) , strTemp.substring(strTemp.indexOf("=") +2));
             }
-            String lib = "app.path" + "_" + nameLib;
-            map.put("app.path" , map.get(nameLib));
+            String lib = Constant.PATH + "_" + nameLib;
+            map.put(Constant.PATH , map.get(lib));
             StringBuilder doc = new StringBuilder();
             for (String key : map.keySet()) {
                 doc.append(key);
