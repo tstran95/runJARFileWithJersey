@@ -39,13 +39,11 @@ public class PropertyInfo {
             InputStream is = Files.newInputStream(Paths.get(url));
             Properties props = new Properties();
             props.load(is);
-            if (Constant.EMPTY.equals(nameLib)){
-                path = props.getProperty(Constant.PATH);
-            }else {
-                path = props.getProperty(Constant.PATH + "_" + nameLib);
-                props.setProperty(Constant.PATH , path);
+            if (!Constant.EMPTY.equals(nameLib)){
+                props.setProperty(Constant.PATH , props.getProperty(Constant.PATH + "_" + nameLib));
                 log.info("PropertyInfo constructor() RUNNING with Message : PATH HAVE CHANGED");
             }
+            path = props.getProperty(Constant.PATH);
             period = props.getProperty(Constant.CONFIG_PERIOD);
             if (!Constant.EMPTY.equals(className)) {
                 props.setProperty(Constant.CONFIG_CLASS , className);
