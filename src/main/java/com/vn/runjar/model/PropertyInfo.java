@@ -49,6 +49,7 @@ public class PropertyInfo {
             period = props.getProperty(Constant.CONFIG_PERIOD);
             if (!Constant.EMPTY.equals(className)) {
                 props.setProperty(Constant.CONFIG_CLASS , className);
+                log.info("PropertyInfo constructor() CHANGE CLASS NAME PROPERTY");
             }
             clazzName = props.getProperty(Constant.CONFIG_CLASS);
             log.info("PropertyInfo constructor() END");

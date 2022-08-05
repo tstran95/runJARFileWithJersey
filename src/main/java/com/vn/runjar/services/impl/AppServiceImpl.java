@@ -54,7 +54,8 @@ public class AppServiceImpl implements AppService {
             String path = PropertyInfo.path;
             log.info("AppServiceImpl method run() RUNNING with PATH {}", path);
             // load Class from Main
-            Class<?> classLoaded = Main.initClass(libName , PropertyInfo.clazzName);
+            Class<?> classLoaded = Main.initClass(libName , classInfo.getClassName());
+            log.info("AppServiceImpl method run() RUNNING with ClassNAME {}", PropertyInfo.clazzName);
             log.info("AppServiceImpl method run() RUNNING with Class {}", classLoaded);
 
             String status = jedis.hget(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR);
