@@ -29,4 +29,6 @@ public class Constant {
     public static final String PROPERTY_NOT_FOUND = "Cant find Property";
     public static final String EMPTY = "";
     public static final String CONFIG_CLASS = "app.class";
+    public static final String PROCESSING = "PROCESSING";
+    public static final String LOADING_LIB = "The library is being reloaded. Please try again next time!!";
 }
