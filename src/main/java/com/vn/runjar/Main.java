@@ -18,11 +18,11 @@ public class Main {
     public static void main(String[] args) {
         PropertyInfo.instance(Constant.MAIN_STRING , Constant.EMPTY, Constant.EMPTY);
         initClass(Constant.MAIN_STRING, Constant.EMPTY, Constant.EMPTY);
-        String time = PropertyInfo.period;
-        MyTaskTimer schedule = new MyTaskTimer();
-        // creating timer task, timer
-        Timer timer = new Timer();
-        timer.schedule(schedule, new Date(), AppUtil.parseLong(time));
+//        String time = PropertyInfo.period;
+//        MyTaskTimer schedule = new MyTaskTimer();
+//        // creating timer task, timer
+//        Timer timer = new Timer();
+//        timer.schedule(schedule, new Date(), AppUtil.parseLong(time));
 
 //        // using with WatchEvent API
 //        JedisPool jedisPool = JedisPoolFactory.getInstance();

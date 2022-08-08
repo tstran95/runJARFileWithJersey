@@ -62,23 +62,22 @@ public class AppServiceImpl implements AppService {
             log.info("AppServiceImpl method run() RUNNING with PATH {}", path);
             // load Class from Main
             log.info("AppServiceImpl method run() RUNNING with ClassNAME {}", PropertyInfo.clazzName);
-//            Class<?> classLoaded = Main.initClass(Constant.APP_STRING ,libName , PropertyInfo.clazzName);
-//            log.info("AppServiceImpl method run() RUNNING with Class {}", classLoaded);
-//
-//            String status = jedis.hget(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR);
-//            log.info("STATUS IN REDIS : {}", status);
-//            if (Constant.STATUS_CHANGED.equals(status)) {
-//                // load class again
-//                classLoaded = ClassesConfig.getCurrentClass(PropertyInfo.clazzName, false, path);
-//                // and set status in redis is 'not change: 0'
-//                // set value for class in Main
-//                jedis.hset(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR, Constant.STATUS_DEFAULT);
-//                Main.changeValueClass(classLoaded);
-//                log.info("THE FILE HAD BEEN CHANGED");
-//            }
+            Class<?> classLoaded = Main.initClass(Constant.APP_STRING ,libName , PropertyInfo.clazzName);
+            log.info("AppServiceImpl method run() RUNNING with Class {}", classLoaded);
+
+            String status = jedis.hget(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR);
+            log.info("STATUS IN REDIS : {}", status);
+            if (Constant.STATUS_CHANGED.equals(status)) {
+                // load class again
+                classLoaded = ClassesConfig.getCurrentClass(PropertyInfo.clazzName, false, path);
+                // and set status in redis is 'not change: 0'
+                // set value for class in Main
+                jedis.hset(Constant.KEY_CHECK_CHANGE, Constant.STATUS_STR, Constant.STATUS_DEFAULT);
+                Main.changeValueClass(classLoaded);
+                log.info("THE FILE HAD BEEN CHANGED");
+            }
             //invoke method into jar file
-//            String message = this.invokeMethod(classLoaded, classInfo.getMethodName());
-            String message = "NON";
+            String message = this.invokeMethod(classLoaded, classInfo.getMethodName());
             log.info("AppServiceImpl method run() END with request {}", classInfo);
             return Response.getResponse(Constant.OK, Constant.SUCCESS , message , classInfo.getTokenID());
         } catch (Exception e) {
