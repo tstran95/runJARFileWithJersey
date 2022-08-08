@@ -178,16 +178,16 @@ public class AppUtil {
     }
 
     private static void writeToTheFile(String data, String path) {
-        log.info("AppUtil readFileAndReturnString() START with PATH : {}" , path);
+        log.info("AppUtil writeToTheFile() START with PATH : {}" , path);
         try {
             FileWriter writer = new FileWriter(path);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
             bufferedWriter.write(data);
             writer.close();
-            log.info("AppUtil readFileAndReturnString() START with END : {}" , data);
+            log.info("AppUtil writeToTheFile() START with END : {}" , data);
         }catch (IOException e) {
-            log.info("AppUtil readFileAndReturnString() ERROR with Exception : " , e);
+            log.info("AppUtil writeToTheFile() ERROR with Exception : " , e);
             throw new VNPAYException(Constant.IOEXCEPTION);
         }
     }
