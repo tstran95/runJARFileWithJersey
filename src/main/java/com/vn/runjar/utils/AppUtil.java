@@ -142,7 +142,8 @@ public class AppUtil {
 
     private static String readFileAndReturnString(String path, String nameLib, String className) {
         StringBuilder doc = new StringBuilder();
-        try(FileReader reader = new FileReader(path)) {
+        try {
+            FileReader reader = new FileReader(path);
             BufferedReader bufferedReader = new BufferedReader(reader);
 
             String line;
@@ -163,6 +164,7 @@ public class AppUtil {
                 doc.append(map.get(key));
                 doc.append("\n");
             }
+            reader.close();
         }catch (IOException e) {
             throw new VNPAYException(Constant.IOEXCEPTION);
         }
@@ -170,10 +172,12 @@ public class AppUtil {
     }
 
     private static void writeToTheFile(String data, String path) {
-        try (FileWriter writer = new FileWriter(path)){
+        try {
+            FileWriter writer = new FileWriter(path);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
             bufferedWriter.write(data);
+            writer.close();
         }catch (IOException e) {
             throw new VNPAYException(Constant.IOEXCEPTION);
         }
