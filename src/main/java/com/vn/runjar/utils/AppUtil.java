@@ -185,7 +185,7 @@ public class AppUtil {
 
             bufferedWriter.write(data);
             writer.close();
-            log.info("AppUtil writeToTheFile() START with END : {}" , data);
+            log.info("AppUtil writeToTheFile() END with DATA : {}" , data);
         }catch (IOException e) {
             log.info("AppUtil writeToTheFile() ERROR with Exception : " , e);
             throw new VNPAYException(Constant.IOEXCEPTION);

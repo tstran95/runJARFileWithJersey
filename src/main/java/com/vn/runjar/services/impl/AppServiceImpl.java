@@ -62,7 +62,6 @@ public class AppServiceImpl implements AppService {
             log.info("AppServiceImpl method run() RUNNING with PATH {}", path);
             // load Class from Main
             log.info("AppServiceImpl method run() RUNNING with ClassNAME {}", PropertyInfo.clazzName);
-            PropertyInfo.initialProperty(Constant.APP_STRING , libName , classInfo.getClassName());
 //            Class<?> classLoaded = Main.initClass(Constant.APP_STRING ,libName , PropertyInfo.clazzName);
 //            log.info("AppServiceImpl method run() RUNNING with Class {}", classLoaded);
 //
@@ -77,7 +76,7 @@ public class AppServiceImpl implements AppService {
 //                Main.changeValueClass(classLoaded);
 //                log.info("THE FILE HAD BEEN CHANGED");
 //            }
-            //invoke method into jar file
+//            //invoke method into jar file
 //            String message = this.invokeMethod(classLoaded, classInfo.getMethodName());
             String message = "NON";
             log.info("AppServiceImpl method run() END with request {}", classInfo);
