@@ -37,7 +37,7 @@ public class Main {
         log.info("MAIN initClass() START");
         log.info("MAIN initClass() with Property CLASS NAME : {}" , PropertyInfo.clazzName);
         if (clazz == null) {
-            PropertyInfo.initialProperty(key , libName , className);
+//            PropertyInfo.instance(key , libName , className);
             log.info("MAIN initClass() with Property CLASS NAME : {}" , PropertyInfo.clazzName);
             clazz = ClassesConfig.getCurrentClass(PropertyInfo.clazzName,
                     true,
