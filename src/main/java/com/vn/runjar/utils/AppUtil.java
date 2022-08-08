@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
@@ -134,45 +135,48 @@ public class AppUtil {
         }
     }
 
-    public static void readAndWriteFileProps(String path , String nameLib) {
-        try {
-            FileReader reader = new FileReader(path);
+    public static void readAndWriteFileProps(String path , String nameLib, String className) {
+        String data = readFileAndReturnString(path , nameLib , className);
+        writeToTheFile(data , path);
+    }
+
+    private static String readFileAndReturnString(String path, String nameLib, String className) {
+        StringBuilder doc = new StringBuilder();
+        try(FileReader reader = new FileReader(path)) {
             BufferedReader bufferedReader = new BufferedReader(reader);
 
             String line;
-            StringBuilder str = new StringBuilder();
+            Map<String , String> map = new HashMap<>();
 
             while ((line = bufferedReader.readLine()) != null) {
-                str.append(line);
-                str.append("\n");
+                String key = (line.substring(0 , (line.indexOf("=") - 1)));
+                String value = line.substring(line.indexOf("=") +2);
+                map.put(key , value);
             }
-            reader.close();
 
-            String[] arrayList = str.toString().split("\n");
-            Map<String , String> map = new HashMap<>();
-            for (String strTemp : arrayList) {
-                map.put((strTemp.substring(0 , (strTemp.indexOf("=") - 1))) , strTemp.substring(strTemp.indexOf("=") +2));
-            }
             String lib = Constant.PATH + "_" + nameLib;
             map.put(Constant.PATH , map.get(lib));
-            StringBuilder doc = new StringBuilder();
+            map.put(Constant.CONFIG_CLASS , className);
             for (String key : map.keySet()) {
                 doc.append(key);
                 doc.append( " = " );
                 doc.append(map.get(key));
                 doc.append("\n");
             }
+        }catch (IOException e) {
+            throw new VNPAYException(Constant.IOEXCEPTION);
+        }
+        return doc.toString();
+    }
 
-            FileOutputStream outputStream = new FileOutputStream(path);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
-            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
+    private static void writeToTheFile(String data, String path) {
+        try (FileWriter writer = new FileWriter(path)){
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
-            bufferedWriter.write(doc.toString());
-
-            bufferedWriter.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            bufferedWriter.write(data);
+        }catch (IOException e) {
+            throw new VNPAYException(Constant.IOEXCEPTION);
         }
     }
+
 }
