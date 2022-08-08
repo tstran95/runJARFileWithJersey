@@ -136,11 +136,15 @@ public class AppUtil {
     }
 
     public static void readAndWriteFileProps(String path , String nameLib, String className) {
+        log.info("AppUtil readAndWriteFileProps() START with PATH : {}" , path);
         String data = readFileAndReturnString(path , nameLib , className);
+//        log.info("AppUtil watchEvent RUNNING with DATA : {}" , data);
         writeToTheFile(data , path);
+        log.info("AppUtil readAndWriteFileProps() END with DATA : {}" , data);
     }
 
     private static String readFileAndReturnString(String path, String nameLib, String className) {
+        log.info("AppUtil readFileAndReturnString() START with ClassName : {}" , className);
         StringBuilder doc = new StringBuilder();
         try {
             FileReader reader = new FileReader(path);
@@ -166,19 +170,24 @@ public class AppUtil {
             }
             reader.close();
         }catch (IOException e) {
+            log.info("AppUtil readFileAndReturnString() ERROR with Exception : " , e);
             throw new VNPAYException(Constant.IOEXCEPTION);
         }
+        log.info("AppUtil readFileAndReturnString() END with Response : {}" , doc);
         return doc.toString();
     }
 
     private static void writeToTheFile(String data, String path) {
+        log.info("AppUtil readFileAndReturnString() START with PATH : {}" , path);
         try {
             FileWriter writer = new FileWriter(path);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
             bufferedWriter.write(data);
             writer.close();
+            log.info("AppUtil readFileAndReturnString() START with END : {}" , data);
         }catch (IOException e) {
+            log.info("AppUtil readFileAndReturnString() ERROR with Exception : " , e);
             throw new VNPAYException(Constant.IOEXCEPTION);
         }
     }
