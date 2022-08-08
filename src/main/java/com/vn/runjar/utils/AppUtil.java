@@ -139,7 +139,7 @@ public class AppUtil {
         log.info("AppUtil readAndWriteFileProps() START with PATH : {}" , path);
         String data = readFileAndReturnString(path , nameLib , className);
 //        log.info("AppUtil watchEvent RUNNING with DATA : {}" , data);
-//        writeToTheFile(data , path);
+        writeToTheFile(data , path);
         log.info("AppUtil readAndWriteFileProps() END with DATA : {}" , data);
     }
 
@@ -168,13 +168,8 @@ public class AppUtil {
                 doc.append(map.get(key));
                 doc.append("\n");
             }
-            reader.close();
+            bufferedReader.close();
 
-            FileWriter writer = new FileWriter(path);
-            BufferedWriter bufferedWriter = new BufferedWriter(writer);
-
-            bufferedWriter.write(doc.toString());
-            writer.close();
         }catch (IOException e) {
             log.info("AppUtil readFileAndReturnString() ERROR with Exception : " , e);
             throw new VNPAYException(Constant.IOEXCEPTION);
@@ -183,19 +178,19 @@ public class AppUtil {
         return doc.toString();
     }
 
-//    private static void writeToTheFile(String data, String path) {
-//        log.info("AppUtil writeToTheFile() START with PATH : {}" , path);
-//        try {
-//            FileWriter writer = new FileWriter(path);
-//            BufferedWriter bufferedWriter = new BufferedWriter(writer);
-//
-//            bufferedWriter.write(data);
-//            writer.close();
-//            log.info("AppUtil writeToTheFile() END with DATA : {}" , data);
-//        }catch (IOException e) {
-//            log.info("AppUtil writeToTheFile() ERROR with Exception : " , e);
-//            throw new VNPAYException(Constant.IOEXCEPTION);
-//        }
-//    }
+    private static void writeToTheFile(String data, String path) {
+        log.info("AppUtil writeToTheFile() START with PATH : {}" , path);
+        try {
+            FileWriter writer = new FileWriter(path);
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+
+            bufferedWriter.write(data);
+            bufferedWriter.close();
+            log.info("AppUtil writeToTheFile() END with DATA : {}" , data);
+        }catch (IOException e) {
+            log.info("AppUtil writeToTheFile() ERROR with Exception : " , e);
+            throw new VNPAYException(Constant.IOEXCEPTION);
+        }
+    }
 
 }
