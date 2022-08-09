@@ -193,4 +193,21 @@ public class AppUtil {
         }
     }
 
+    public static String getPath(String key) {
+        log.info("AppUtil getPath() START with KEY {}" , key);
+        String pathParent = Objects.requireNonNull(AppUtil.class.getResource("/")).getPath();
+        log.info("AppUtil getPath() PATH : {}", pathParent);
+        Path pathStr = Paths.get(pathParent).getParent().getParent().getParent().getParent();
+        String url;
+        String urlSub;
+        if (Constant.MAIN_STRING.equals(key)) {
+            urlSub = pathStr.getParent().getParent().getParent().toString();
+        } else {
+            urlSub = pathStr.toString();
+        }
+        url = urlSub.substring(urlSub.indexOf("/")) + Constant.CONFIG_URL;
+        log.info("AppUtil getPath() END with URL {}" , url);
+        return url;
+    }
+
 }

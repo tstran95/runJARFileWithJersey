@@ -16,6 +16,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -49,7 +50,7 @@ public class AppServiceImpl implements AppService {
             Validator.checkInput(classInfo);
 
             String className = classInfo.getClassName();
-            String libName = classInfo.getLibName() == null ? Constant.EMPTY : classInfo.getLibName();
+            String libName = Objects.isNull(classInfo.getLibName()) ? Constant.EMPTY : classInfo.getLibName();
             log.info("AppServiceImpl method run() RUNNING with LibName {}", libName);
             PropertyInfo.initialProperty(Constant.APP_STRING , libName , className);
             String path = PropertyInfo.path;
